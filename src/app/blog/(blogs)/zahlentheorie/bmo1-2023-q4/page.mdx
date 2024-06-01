@@ -1,14 +1,12 @@
-import { getBlogMetadata } from "../../../../../lib/seo.ts";
+---
+  title: "BMO1 2023 Frage Nr. 4"
+  description: "Meine Lösungsansatz für BMO1 2023 Frage Nr. 4"
+  coverURL: "https://i.imgur.com/KBuRiaO.jpg"
+  date: "2024-06-01"
+  keywords: ["BMO1", "Zahlentheorie"]
+---
 
-export const metadata = getBlogMetadata({
-  title: "BMO1 2023 Frage Nr. 4",
-  description: "Meine Lösungsansatz für BMO1 2023 Frage Nr. 4",
-  coverURL: "",
-  date: "2024-06-01",
-  keywords: ["BMO1", "Zahlentheorie"],
-});
-
-# Das Problem
+# Die Problemstellung
 
 Man bestimme alle positiven ganzen Zahlen $n$ für die gilt, dass $n2^n+1$ eine Quadratzahl ist.
 
@@ -20,8 +18,46 @@ Beachte, dass $n2^n+1$ eine ungerade Nummer ist, also kann man sagen
 \begin{align*}
 n2^n+1 &= (2k+1)^2 \\
 n2^n &= 4k^2+4k \\
-n2^{n-2} &= k(k+1)
 \end{align*}
 ```
 
-Die Nummern $k$ und $k + 1$ sind fortlaufende ganze Zahlen, das beudeutet, dass sie auch teilerfremd sind. Folglich ist nur und genau eine von ihnen eine gerade Nummer.
+Dann
+
+```math
+\begin{align}
+n2^{n-2} &= k(k+1)
+\end{align}
+```
+
+Die Nummern $k$ und $k + 1$ sind fortlaufende ganze Zahlen, das beudeutet, dass sie auch teilerfremd sind. Folglich ist nur eine von ihnen gerade.
+
+Wenn $n$ ungerade ist, dann ist die Potenz von zwei $n - 2$ auf der linken Seite. Im Vergleich dazu, wenn $n$ gerade ist, beiträgt $n$ noch eine weitere Potenz von zwei, also ist die Potenz darauf $n - 1$.
+
+Ohne Beschränkung der Allgemeinheit annehmen wir, dass $k$ gerade ist. Da $k + 1$ ungerade ist, muss die Potenz von zwei von $k + 1$ entweder $n - 2$ oder $n - 1$ sein. Dann habe wir
+
+```math
+\begin{align*}
+k &\ge 2^{n - 2} \\
+k(k+1) &> k^2 \ge (2^{n - 2})^2 \\
+\end{align*}
+```
+
+Jetzt vergleichen wir $(2^{n - 2})^2$ mit $n2^{n-2}$. Zuerst dividieren wir die beiden Seiten von $2^{n-2}$, dann ist der folgende Ausdruck wahr für alle $n \ge 5$
+
+```math
+\begin{align*}
+2^{n - 2} > n \\
+\end{align*}
+```
+
+Mit dem Induktionbeweis, kommen wir zum Schluss, dass $n2^n+1$ keine Quadratzahl ist, wenn $n \ge 5$.
+
+Endlich prüfen wir die Fälle $n = 1, 2, 3, 4$ und finden die Lösungen $n \in \{2, 3\}$.
+
+# Schlussfolgerung
+
+Meine größten Fehler am Anfang war die Annahme, dass einer der $k$ und $k+1$ muss gleich $2^{n - 2}$ sein. Zum Beispiel, falls $k$ gerade ist, ist n zwar durch $k+1$ teilbar, doch es ist nicht unbedingt, dass sie gleich sind.
+
+Ich konnte diese Frage im Wettbewerb im November 2023 leider nicht lösen, aber was ich durch den ganzen Vorgang bemerkte, war, dass ich in dieser Zeit viel gelernt habe.
+
+Im Großen und Ganzen machte es mir viel Spaß! Ich freue mich auf die nächste Herausforderung.

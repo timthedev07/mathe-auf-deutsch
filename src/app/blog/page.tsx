@@ -1,25 +1,15 @@
 import { FC } from "react";
-import { readdir } from "fs/promises";
-import { join } from "path";
-
-const getBlogs = async () => {
-  const categories = await readdir(
-    join(process.cwd(), "src", "app", "blog", "(blogs)")
-  );
-  const blogs: Record<string, string[]> = {};
-  for (const category of categories) {
-    if (category === "layout.tsx") continue;
-    const entries = await readdir(
-      join(process.cwd(), "src", "app", "blog", "(blogs)", category)
-    );
-    blogs[category] = entries;
-  }
-  return blogs;
-};
+import { BlogMainPage } from "../../components/BlogMain";
+import { getBlogs } from "../../lib/getBlogs";
 
 const BlogHome: FC = async () => {
-  const blogs = await getBlogs();
-  return <>{Object.keys(blogs)}</>;
+  const [blogs, categories] = await getBlogs();
+
+  return (
+    <div className="flex">
+      <BlogMainPage meta={blogs} categories={categories} />
+    </div>
+  );
 };
 
 export default BlogHome;
