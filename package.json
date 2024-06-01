@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && mkdir -p .next/src/app/blog && rsync -av --progress 'src/app/blog/(blogs)' .next/src/app/blog/ --exclude layout.tsx",
+    "build": "next build && mkdir -p '.next/src/app/blog/(blogs)' && cd 'src/app/blog/(blogs)' && find . -name 'layout.tsx' -prune -o -type f -print | cpio -pdm --verbose '../../../../.next/src/app/blog/(blogs)'",
     "start": "next start",
     "lint": "next lint"
   },
