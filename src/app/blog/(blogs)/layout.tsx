@@ -19,14 +19,14 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
   const headersList = headers();
   const pathname = headersList.get("x-pathname") || "";
   const slug = pathname.split("/").slice(2);
-  console.log(await readdir(process.cwd()));
+  console.log(await readdir(join(process.cwd(), ".next")));
   const fpath = join(
     process.cwd(),
     ...(process.env.NODE_ENV === "development" ? [] : [".next"]),
     "src",
     "app",
     "blog",
-    ...(process.env.NODE_ENV === "development" ? ["(blogs)"] : []),
+    "(blogs)",
     ...slug,
     "page.mdx"
   );
