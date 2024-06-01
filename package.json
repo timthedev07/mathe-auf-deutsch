@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && mkdir -p .next/src/app/blog && rsync -av --progress 'src/app/blog/(blogs)' .next/src/app/blog/ --exclude layout.tsx",
     "start": "next start",
     "lint": "next lint"
   },
