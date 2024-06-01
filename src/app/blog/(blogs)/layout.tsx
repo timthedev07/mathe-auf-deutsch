@@ -21,6 +21,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
   const slug = pathname.split("/").slice(2);
   const fpath = join(
     process.cwd(),
+    ...(process.env.NODE_ENV === "development" ? [] : [".next"]),
     "src",
     "app",
     "blog",
