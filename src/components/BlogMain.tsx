@@ -11,6 +11,7 @@ import { getBlogs } from "../lib/getBlogs";
 import Image from "next/image";
 import { truncateAtWord } from "../lib/truncateAtWord";
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface BlogMainPageProps {
   categories: string[];
@@ -19,7 +20,7 @@ interface BlogMainPageProps {
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-export const BlogMainPage: FC<BlogMainPageProps> = ({ categories, meta }) => {
+const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
   const params = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -142,3 +143,9 @@ export const BlogMainPage: FC<BlogMainPageProps> = ({ categories, meta }) => {
     </>
   );
 };
+
+export const BlogMainPage = (props: BlogMainPageProps) => (
+  <Suspense>
+    <Component {...props} />
+  </Suspense>
+);
