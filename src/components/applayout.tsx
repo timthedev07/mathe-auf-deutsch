@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Nav } from "./layout/nav";
-import { GitHubCorner } from "./layout/GithubCorner";
+import { GitHubCorner } from "./layout/GHCorner";
 
 interface AppLayoutProps {
   children: React.ReactNode;
