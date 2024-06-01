@@ -2,7 +2,7 @@ import { FC } from "react";
 import { BlogAside } from "../../../components/BlogAside";
 import { headers } from "next/headers";
 import { join } from "path";
-import { readFile } from "fs/promises";
+import { readFile, readdir } from "fs/promises";
 import { extractHeadings } from "../../../lib/extractHeadings";
 import { Metadata, ResolvingMetadata } from "next";
 import { getMetadata } from "../../../lib/seo";
@@ -19,6 +19,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
   const headersList = headers();
   const pathname = headersList.get("x-pathname") || "";
   const slug = pathname.split("/").slice(2);
+  console.log(await readdir(process.cwd()));
   const fpath = join(
     process.cwd(),
     ...(process.env.NODE_ENV === "development" ? [] : [".next"]),
