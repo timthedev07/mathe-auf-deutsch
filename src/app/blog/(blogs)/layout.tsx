@@ -25,7 +25,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
     "src",
     "app",
     "blog",
-    "(blogs)",
+    ...(process.env.NODE_ENV === "development" ? ["(blogs)"] : []),
     ...slug,
     "page.mdx"
   );
