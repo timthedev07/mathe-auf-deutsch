@@ -4,10 +4,13 @@ import {
   FolderOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { FloatButton, Input, Menu, MenuProps } from "antd";
+import { Button, FloatButton, Input, Menu, MenuProps } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC, useMemo, useState } from "react";
 import { getBlogs } from "../lib/getBlogs";
+import Image from "next/image";
+import { truncateAtWord } from "../lib/truncateAtWord";
+import Link from "next/link";
 
 interface BlogMainPageProps {
   categories: string[];
@@ -102,14 +105,40 @@ export const BlogMainPage: FC<BlogMainPageProps> = ({ categories, meta }) => {
         icon={<SearchOutlined />}
         type="primary"
       />
-      <ul className="fixed left-96 p-8">
-        {JSON.stringify(meta)}
-        {categories.map((category) => {
-          return meta[category].map((each) => (
-            <li key={each.title}>{each.title}</li>
-          ));
-        })}
-      </ul>
+      <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start justify-center flex-wrap overflow-y-auto h-full pb-48">
+        {categories.map((category) =>
+          meta[category].map((each) => (
+            <li key={each.title} className="flex flex-col w-72">
+              <div className="relative w-72 h-48 rounded-lg overflow-hidden">
+                <Image
+                  alt={each.title}
+                  src={each.coverURL}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h2 className="text-white/90 font-semibold text-lg mt-3 h-6">
+                {truncateAtWord(each.title, 20)}
+              </h2>
+              <hr className="h-0 border-1 border-slate-400/30 my-4" />
+              <p className="h-20 text-sm">
+                {truncateAtWord(each.description, 80)}
+              </p>
+              <Link className="w-full" href={`/blog/${category}/${each.slug}`}>
+                <Button
+                  type="primary"
+                  className="w-full"
+                  onClick={() => {
+                    push(`/blog/${category}/${each.slug}`);
+                  }}
+                >
+                  Anlesen
+                </Button>
+              </Link>
+            </li>
+          ))
+        )}
+      </div>
     </>
   );
 };

@@ -24,7 +24,7 @@ export const getBlogs = async () => {
           join(base, category, entry, "page.mdx"),
           "utf-8"
         );
-        return matter(src).data;
+        return { ...matter(src).data, slug: entry };
       })
     );
     blogs[category] = meta;

@@ -9,6 +9,9 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
+  images: {
+    domains: ["i.imgur.com"],
+  },
 };
 
 const withMDX = createMDX({
