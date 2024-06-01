@@ -25,7 +25,7 @@ export const AntDProvider: React.FC<PropsWithChildren> = ({ children }) => {
             },
             Input: {
               colorBgContainer: "transparent",
-              activeBg: colors.slate[700],
+              activeBg: colors.slate[700] + "20",
               colorBorder: colors.gray[700],
             },
           },

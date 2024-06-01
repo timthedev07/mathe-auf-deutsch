@@ -1,5 +1,6 @@
 "use client";
 import {
+  CloseOutlined,
   DeleteOutlined,
   FolderOpenOutlined,
   FolderOutlined,
@@ -73,7 +74,7 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
   return (
     <>
       <div
-        className={`transition duration-300 w-96 bg-slate-800/70 glass fixed left-0 h-full z-50 p-8 ${
+        className={`transition duration-300 w-96 md:bg-slate-800/70 bg-slate-900/95 glass fixed left-0 h-full z-50 p-8 ${
           showAside ? "" : "-translate-x-96 md:translate-x-0"
         } overflow-y-auto `}
       >
@@ -119,10 +120,11 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
       </div>
       <FloatButton
         className="md:invisible"
-        icon={<SearchOutlined />}
+        icon={showAside ? <CloseOutlined /> : <SearchOutlined />}
         type="primary"
+        onClick={() => setShowAside((v) => !v)}
       />
-      <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start justify-center flex-wrap overflow-y-auto h-full pb-48">
+      <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start w-full justify-center flex-wrap overflow-y-auto h-full pb-48">
         {categories.map((category) =>
           meta[category]
             .filter(
