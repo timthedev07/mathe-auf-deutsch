@@ -17,7 +17,7 @@ const Item: FC<{ children: React.ReactNode; href: string }> = ({
 export const Nav: FC<NavProps> = ({}) => {
   return (
     <nav
-      className={`flex justify-start gap-12 items-center h-16 px-12 sticky glass z-20 top-0`}
+      className={`flex justify-start gap-12 items-center h-16 px-12 sticky glass z-10 top-0`}
     >
       <Item href="/">Startseite</Item>
       <Item href="/blog">Blog</Item>
