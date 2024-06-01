@@ -1,5 +1,6 @@
 "use client";
 import {
+  DeleteOutlined,
   FolderOpenOutlined,
   FolderOutlined,
   SearchOutlined,
@@ -23,6 +24,7 @@ type MenuItem = Required<MenuProps>["items"][number];
 const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
   const params = useSearchParams();
   const pathname = usePathname();
+  const t = params.get("q") || "";
   const { push } = useRouter();
   const items: MenuItem[] = useMemo(
     () => [
@@ -64,8 +66,10 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
   };
 
   const [showAside, setShowAside] = useState(false);
-  const [q, setQ] = useState(params.get("q") || "");
-  const [category, setCategory] = useState(params.get("kategorie") || "");
+  const [q, setQ] = useState(t);
+  const [selectedCategory, setCategory] = useState(
+    () => params.get("kategorie") || ""
+  );
   return (
     <>
       <div
@@ -77,13 +81,25 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
           Suchen
         </h1>
         <Input
-          defaultValue={q}
+          value={q}
           onChange={(e) => {
             setQ(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") updateParams(["q"], [q]);
+          }}
           addonAfter={
+            <DeleteOutlined
+              className="hover:text-red-500 transition duration-200 cursor-pointer"
+              onClick={() => {
+                setQ("");
+                updateParams(["q"], [""]);
+              }}
+            />
+          }
+          addonBefore={
             <SearchOutlined
-              className="hover:text-blue-500 transition duration-300 cursor-pointer"
+              className="hover:text-emerald-500 transition duration-200 cursor-pointer"
               onClick={() => {
                 updateParams(["q"], [q]);
               }}
@@ -96,7 +112,7 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
             setCategory(e.key);
             updateParams(["kategorie"], [e.key]);
           }}
-          defaultSelectedKeys={[category]}
+          defaultSelectedKeys={[selectedCategory]}
           color="red"
           items={items}
         ></Menu>
@@ -108,36 +124,48 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
       />
       <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start justify-center flex-wrap overflow-y-auto h-full pb-48">
         {categories.map((category) =>
-          meta[category].map((each) => (
-            <li key={each.title} className="flex flex-col w-72">
-              <div className="relative w-72 h-48 rounded-lg overflow-hidden">
-                <Image
-                  alt={each.title}
-                  src={each.coverURL}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h2 className="text-white/90 font-semibold text-lg mt-3 h-6">
-                {truncateAtWord(each.title, 20)}
-              </h2>
-              <hr className="h-0 border-1 border-slate-400/30 my-4" />
-              <p className="h-20 text-sm">
-                {truncateAtWord(each.description, 80)}
-              </p>
-              <Link className="w-full" href={`/blog/${category}/${each.slug}`}>
-                <Button
-                  type="primary"
+          meta[category]
+            .filter(
+              (v) =>
+                (!t ||
+                  (v.title as string)
+                    .toLowerCase()
+                    .includes(t.toLowerCase())) &&
+                (!selectedCategory || category === selectedCategory)
+            )
+            .map((each) => (
+              <li key={each.title} className="flex flex-col w-72">
+                <div className="relative w-72 h-48 rounded-lg overflow-hidden">
+                  <Image
+                    alt={each.title}
+                    src={each.coverURL}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <h2 className="text-white/90 font-semibold text-lg mt-3 h-6">
+                  {truncateAtWord(each.title, 20)}
+                </h2>
+                <hr className="h-0 border-1 border-slate-400/30 my-4" />
+                <p className="h-20 text-sm">
+                  {truncateAtWord(each.description, 80)}
+                </p>
+                <Link
                   className="w-full"
-                  onClick={() => {
-                    push(`/blog/${category}/${each.slug}`);
-                  }}
+                  href={`/blog/${category}/${each.slug}`}
                 >
-                  Anlesen
-                </Button>
-              </Link>
-            </li>
-          ))
+                  <Button
+                    type="primary"
+                    className="w-full"
+                    onClick={() => {
+                      push(`/blog/${category}/${each.slug}`);
+                    }}
+                  >
+                    Anlesen
+                  </Button>
+                </Link>
+              </li>
+            ))
         )}
       </div>
     </>
