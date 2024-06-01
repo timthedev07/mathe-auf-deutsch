@@ -1,0 +1,27 @@
+import { getBlogMetadata } from "../../../../../lib/seo.ts";
+
+export const metadata = getBlogMetadata({
+  title: "BMO1 2023 Frage Nr. 4",
+  description: "Meine Lösungsansatz für BMO1 2023 Frage Nr. 4",
+  coverURL: "",
+  date: "2024-06-01",
+  keywords: ["BMO1", "Zahlentheorie"],
+});
+
+# Das Problem
+
+Man bestimme alle positiven ganzen Zahlen $n$ für die gilt, dass $n2^n+1$ eine Quadratzahl ist.
+
+# Meine Lösung
+
+Beachte, dass $n2^n+1$ eine ungerade Nummer ist, also kann man sagen
+
+```math
+\begin{align*}
+n2^n+1 &= (2k+1)^2 \\
+n2^n &= 4k^2+4k \\
+n2^{n-2} &= k(k+1)
+\end{align*}
+```
+
+Die Nummern $k$ und $k + 1$ sind fortlaufende ganze Zahlen, das beudeutet, dass sie auch teilerfremd sind. Folglich ist nur und genau eine von ihnen eine gerade Nummer.

@@ -15,9 +15,13 @@
     "@next/mdx": "^14.2.3",
     "@types/mdx": "^2.0.13",
     "antd": "^5.17.4",
+    "gray-matter": "^4.0.3",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "rehype-katex": "^7.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -25,6 +29,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "eslint-plugin-mdx": "^3.1.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

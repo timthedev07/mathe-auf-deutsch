@@ -11,7 +11,7 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
     <div>
       <Nav />
       <GitHubCorner href="https://github.com/timthedev07/mathe-auf-deutsch" />
-      <div className="">{children}</div>
+      {children}
     </div>
   );
 };

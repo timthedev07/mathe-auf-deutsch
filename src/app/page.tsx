@@ -37,6 +37,12 @@ export default function Home() {
           der Universität... Jetzt ist es noch Mai 2024, und in diesem
           Augenblick bin ich mir noch nicht sicher.
         </p>
+        <p>
+          Es ist ganz normal, dass man manchmal einige Fehler in meinen Artikeln
+          bemerken kann. Wenn Sie irgendwelche Fehler finden, bitte lassen Sie
+          mich wissen (timpersonal07@gmail.com), ich möchte auch von euch
+          lernen!
+        </p>
       </Section>
     </div>
   );
