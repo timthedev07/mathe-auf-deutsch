@@ -13,6 +13,7 @@
 /.next/
 /out/
 aux
+public/mdx-content
 
 # production
 /build
