@@ -2,7 +2,7 @@ import { FC } from "react";
 import { BlogAside } from "../../../components/BlogAside";
 import { headers } from "next/headers";
 import { join, resolve } from "path";
-import { readFile } from "fs/promises";
+import { readFile, readdir } from "fs/promises";
 import { extractHeadings } from "../../../lib/extractHeadings";
 
 interface LayoutProps {
@@ -15,6 +15,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
   const slug = pathname.split("/").slice(2);
 
   const dir = resolve("./public", "mdx-content");
+  console.log(await readdir(dir));
   const fpath = join(
     ...(process.env.NODE_ENV === "development"
       ? [process.cwd(), "src", "app", "blog", "(blogs)"]
