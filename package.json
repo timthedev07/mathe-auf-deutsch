@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && mkdir -p '.next/src/app/blog/(blogs)' && cp -r 'src/app/blog/(blogs)/' '.next/src/app/blog/(blogs)' && rm -rf '.next/src/app/blog/(blogs)/layout.tsx'",
+    "build": "next build && mkdir -p 'aux/' && cp -r 'src/app/blog/(blogs)/' 'aux/' && rm -rf 'aux/layout.tsx'",
     "start": "next start",
     "lint": "next lint"
   },
