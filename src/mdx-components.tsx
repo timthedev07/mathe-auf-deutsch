@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { LinkCopier } from "./components/mdx/LinkCopier";
+import Image from "next/image";
 
 const Hr = () => <hr className="h-0 border-1 border-slate-200/30" />;
 
@@ -30,7 +31,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     p: (props) => (
-      <p className="text-sm md:text-base text-white/90" {...props} />
+      <p
+        className="text-sm md:text-base text-white/90 leading-loose md:leading-loose"
+        {...props}
+      />
     ),
     ...components,
   };

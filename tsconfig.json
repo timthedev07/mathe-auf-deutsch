@@ -32,7 +32,13 @@
   ],
   "exclude": ["node_modules"],
   "mdx": {
-    "plugins": ["remark-math", "remark-gfm", "rehype-katex"],
+    "plugins": [
+      "remark-math",
+      "remark-gfm",
+      "rehype-katex",
+      "remark-frontmatter",
+      ["remark-mdx-frontmatter", { "name": "metadata" }]
+    ],
     "checkMdx": true
   }
 }

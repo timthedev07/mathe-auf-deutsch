@@ -10,7 +10,7 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
   images: {
-    domains: ["i.imgur.com"],
+    domains: ["i.imgur.com", "imgur.com"],
   },
 };
 

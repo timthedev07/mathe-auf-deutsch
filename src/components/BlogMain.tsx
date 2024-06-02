@@ -145,8 +145,8 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
                     className="object-cover"
                   />
                 </div>
-                <h2 className="text-white/90 font-semibold text-lg mt-3 h-6">
-                  {truncateAtWord(each.title, 20)}
+                <h2 className="text-white/90 font-semibold text-lg mt-3 h-12">
+                  {truncateAtWord(each.title, 38)}
                 </h2>
                 <hr className="h-0 border-1 border-slate-400/30 my-4" />
                 <p className="h-20 text-sm">

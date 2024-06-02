@@ -1,0 +1,56 @@
+---
+  title: "RSME Das Problem des Monates - Juni 2024"
+  description: "Mein Lösungsansatz dafür"
+  coverURL: https://i.imgur.com/4bwF09E.jpg
+  date: "2024-06-02"
+  keywords: ["Geometrie"]
+---
+
+import { Img } from "@/components/mdx/Image";
+
+# Problemstellung
+
+Die Problemstellung ist auf Spanisch, daher habe ich sie übersetzt:
+
+Es seien zwei Kreise mit den Mittelpunkten $O$ und $O'$ und den Radien $r$ und $r'$, die sich in einem Punkt $A$ tangieren. Von einem beliebigen Punkt $B$ auf der gemeinsamen Tangente aus zeichnen wir die beiden anderen Tangenten an jeden der beiden gegebenen Kreise, wobei die jeweiligen Berührungspunkte $C$ und $C'$ sind. Wohin tendiert das Verhältnis der Flächeninhalte der Dreiecke $ABC$ und $ABC'$, wenn sich der Punkt $B$ entweder dem Punkt $A$ nähert oder sich unendlich weit vom Punkt $A$ entfernt?
+
+# Meine Lösung
+
+Zuerst kann man das Diagram mit GeoGebra zeichnen, dann bekommt man etwas wie das folgende Bild:
+
+<Img
+  src="https://i.imgur.com/4bwF09E.jpg"
+  alt="Problem des Monates - Juni 2024"
+  width={1200}
+  height={800}
+/>
+
+Beachte, dass die die Längen $AB$ und $CB$ sind ebenso lang, weil sie Tangenten vom Kreis mit dem Mittelpunkt $O$, die von dem gleichen Punkt $B$ gezogen sind. Das Gleiche gilt für die Längen $AB$ und $C'B$. Daraus folgt, dass $AB = CB = C'B$. Bezeichne diese Länge mit $x$ und die Winkel $\angle ABC$ und $\angle ABC'$ mit $\alpha$ und $\beta$ jeweils. Dann kann man die Flächen der zwei Dreiecke $ABC$ und $ABC'$ wie folgt berechnen:
+
+```math
+\begin{align*}
+  [ABC]  & = \frac{1}{2} x^2 \sin\alpha \\
+  [ABC'] & = \frac{1}{2} x^2 \sin\beta  \\
+  \frac{[ABC]}{[ABC']} &= \frac{\sin\alpha}{\sin\beta}
+\end{align*}
+```
+
+Im Dreieck $\triangle ABO$, $OA = r$, $AB = x$, also $OB = \sqrt{r^2 + x^2}$. Daraus folgt, dass $\sin\frac{\alpha}{2} = \frac{r}{\sqrt{r^2 + x^2}}$ und $\cos\frac{\alpha}{2} = \frac{x}{\sqrt{r^2 + x^2}}$, dann $\sin\alpha = 2\sin\frac{\alpha}{2}\cos\frac{\alpha}{2} = 2\frac{r}{\sqrt{r^2 + x^2}}\frac{x}{\sqrt{r^2 + x^2}} = \frac{2rx}{r^2 + x^2}$. Auf ähnliche Weise $\sin\beta = \frac{2r'x}{r'^2 + x^2}$. Also
+
+```math
+\begin{align*}
+k &= \frac{\sin\alpha}{\sin\beta} \\
+  &= \frac{\frac{2rx}{r^2 + x^2}}{\frac{2r'x}{r'^2 + x^2}} \\
+  &= \frac{\frac{r}{r^2 + x^2}}{\frac{r'}{r'^2 + x^2}} \\
+
+\end{align*}
+```
+
+Dann berechne dem Limes von $k$ wenn $x \to 0$ und $x \to \infty$:
+
+```math
+\begin{align*}
+  \lim_{r\to 0} k      & = \frac{r'}{r} \\
+  \lim_{r\to \infty} k & = \frac{r}{r'} \\
+\end{align*}
+```

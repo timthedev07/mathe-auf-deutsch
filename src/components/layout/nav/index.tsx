@@ -21,7 +21,7 @@ export const Nav: FC<NavProps> = ({}) => {
     >
       <Item href="/">Startseite</Item>
       <Item href="/blog">Blog</Item>
-      <Item href="https://timthedev07.vercel.app">Über den Autor</Item>
+      <Item href="https://timthedev07.vercel.app">Der Autor</Item>
     </nav>
   );
 };
