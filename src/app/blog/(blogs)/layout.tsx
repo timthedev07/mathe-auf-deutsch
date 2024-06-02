@@ -16,9 +16,8 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
 
   const dir = resolve("./public", "mdx-content");
   const fpath = join(
-    process.cwd(),
     ...(process.env.NODE_ENV === "development"
-      ? ["src", "app", "blog", "(blogs)"]
+      ? [process.cwd(), "src", "app", "blog", "(blogs)"]
       : [dir]),
     ...slug,
     "page.mdx"
