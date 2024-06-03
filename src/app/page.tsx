@@ -18,15 +18,16 @@ export default function Home() {
     <div className="px-16 py-16 max-w-[1000px] mx-auto">
       <Section title="Worum geht es bei dieser Website?">
         <p>
-          Ich habe im Mai 2024 mit dieser persönlichen Website angefange. Damals
-          war ich noch ein IB-Schüler, der Mathematik, Informatik und Physik auf
-          dem hohen Niveau und Deutsch B auf SL belegte. Ich hatte und habe noch
-          immer eine so starke Leidenschaft für diese Fächer, insbesondere
-          Mathematik, da ich vor hatte, die an der Universität zu studieren.
+          Ich habe im Mai 2024 mit dieser persönlichen Website angefangen.
+          Damals war ich noch ein IB-Schüler, der Mathematik, Informatik und
+          Physik auf dem hohen Niveau und Deutsch B auf SL belegte. Ich hatte
+          und habe noch immer eine so starke Leidenschaft für diese Fächer,
+          insbesondere Mathematik, da ich vor hatte, die an der Universität zu
+          studieren.
         </p>
         <p>
           Also, das Ziel dieser Website ist, die faszinierenden Momente und
-          interessante Gedanken, die ich in Mathe oder den anderen Fächern
+          interessante Gedanken, denen ich in Mathe oder den anderen Fächern
           begegne, irgendwo festzuhalten... natürlich ist alles auf Deutsch!
           Warum? Gute Frage. Ich habe einfach Lust darauf, denn ich liebe auch
           die deutsche Sprache und Kultur, und dadurch kann ich auch mein
