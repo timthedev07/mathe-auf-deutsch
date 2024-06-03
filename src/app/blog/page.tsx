@@ -5,11 +5,7 @@ import { getBlogs } from "../../lib/getBlogs";
 const BlogHome: FC = async () => {
   const [blogs, categories] = await getBlogs();
 
-  return (
-    <div className="flex">
-      <BlogMainPage meta={blogs} categories={categories} />
-    </div>
-  );
+  return <BlogMainPage meta={blogs} categories={categories} />;
 };
 
 export default BlogHome;

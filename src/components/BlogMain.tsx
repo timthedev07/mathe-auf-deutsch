@@ -124,51 +124,55 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
         type="primary"
         onClick={() => setShowAside((v) => !v)}
       />
-      <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start w-full justify-center flex-wrap overflow-y-auto h-full pb-48">
-        {categories.map((category) =>
-          meta[category]
-            .filter(
-              (v) =>
-                (!t ||
-                  (v.title as string)
-                    .toLowerCase()
-                    .includes(t.toLowerCase())) &&
-                (!selectedCategory || category === selectedCategory)
-            )
-            .map((each) => (
-              <li key={each.title} className="flex flex-col w-72">
-                <div className="relative w-72 h-48 rounded-lg overflow-hidden">
-                  <Image
-                    alt={each.title}
-                    src={each.coverURL}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h2 className="text-white/90 font-semibold text-lg mt-3 h-12">
-                  {truncateAtWord(each.title, 38)}
-                </h2>
-                <hr className="h-0 border-1 border-slate-400/30 my-4" />
-                <p className="h-20 text-sm">
-                  {truncateAtWord(each.description, 80)}
-                </p>
-                <Link
+      <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start md:w-[calc(100%-384px)] justify-center flex-wrap overflow-y-auto h-full pb-48">
+        {categories
+          .map((category) =>
+            meta[category]
+              .filter(
+                (v) =>
+                  (!t ||
+                    (v.title as string)
+                      .toLowerCase()
+                      .includes(t.toLowerCase())) &&
+                  (!selectedCategory || category === selectedCategory)
+              )
+              .map((each) => [each, category] as [typeof each, string])
+          )
+          .flat()
+          .toSorted(
+            (a, b) =>
+              -new Date(a[0].date).valueOf() + new Date(b[0].date).valueOf()
+          )
+          .map(([each, category]) => (
+            <li key={each.title} className="flex flex-col w-72">
+              <div className="relative w-72 h-48 rounded-lg overflow-hidden">
+                <Image
+                  alt={each.title}
+                  src={each.coverURL}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h2 className="text-white/90 font-semibold text-lg mt-3 h-12">
+                {truncateAtWord(each.title, 38)}
+              </h2>
+              <hr className="h-0 border-1 border-slate-400/30 my-4" />
+              <p className="h-20 text-sm">
+                {truncateAtWord(each.description, 80)}
+              </p>
+              <Link className="w-full" href={`/blog/${category}/${each.slug}`}>
+                <Button
+                  type="primary"
                   className="w-full"
-                  href={`/blog/${category}/${each.slug}`}
+                  onClick={() => {
+                    push(`/blog/${category}/${each.slug}`);
+                  }}
                 >
-                  <Button
-                    type="primary"
-                    className="w-full"
-                    onClick={() => {
-                      push(`/blog/${category}/${each.slug}`);
-                    }}
-                  >
-                    Anlesen
-                  </Button>
-                </Link>
-              </li>
-            ))
-        )}
+                  Anlesen
+                </Button>
+              </Link>
+            </li>
+          ))}
       </div>
     </>
   );
