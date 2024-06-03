@@ -35,11 +35,9 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
 
   return (
     <>
-      <div className="flex">
-        <BlogAside headings={headings} />
-        <div className="fixed flex flex-col gap-4 h-full overflow-y-auto lg:left-80 p-24 pb-64">
-          {children}
-        </div>
+      <BlogAside headings={headings} />
+      <div className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-24 pb-64">
+        {children}
       </div>
     </>
   );

@@ -30,7 +30,7 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
       <div className="lg:hidden block">
         <FloatButton
           className={`transition duration-200 fixed top-24 ${
-            show ? "translate-y-[80vh] translate-x-72" : ""
+            show ? "translate-y-[80vh]" : ""
           } left-8`}
           onClick={() => setShow(!show)}
           type="primary"
@@ -38,8 +38,8 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
         />
       </div>
       <aside
-        className={`transition duration-300 w-96 md:w-80 bg-slate-800/70 glass fixed left-0 h-full z-50 p-8 ${
-          show ? "" : "-translate-x-96 md:translate-x-0"
+        className={`transition duration-300 top-6 pt-24 w-96 md:w-80 bg-slate-800/70 glass fixed left-0 h-full z-20 p-8 ${
+          show ? "" : "-translate-x-96 lg:translate-x-0"
         } overflow-y-auto`}
       >
         <h1 className="text-lg text-white font-semibold text-center mt-2">

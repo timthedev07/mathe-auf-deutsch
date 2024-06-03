@@ -9,7 +9,7 @@ export const GitHubCorner: FC<GitHubCornerProps> = ({ href }) => {
     <>
       <a
         href={href}
-        className="github-corner fixed top-0 right-0 z-20"
+        className="github-corner fixed top-0 right-0 z-[60]"
         aria-label="View source on GitHub"
       >
         <svg

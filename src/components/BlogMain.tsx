@@ -74,7 +74,7 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
   return (
     <>
       <div
-        className={`transition duration-300 w-96 md:bg-slate-800/70 bg-slate-900/95 glass fixed left-0 h-full z-50 p-8 ${
+        className={`transition top-0 duration-300 w-96 pt-24 md:bg-slate-800/70 bg-slate-900/95 glass fixed left-0 h-full z-50 lg:z-10 p-8 ${
           showAside ? "" : "-translate-x-96 md:translate-x-0"
         } overflow-y-auto `}
       >
@@ -124,7 +124,7 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
         type="primary"
         onClick={() => setShowAside((v) => !v)}
       />
-      <div className="fixed md:left-96 pl-8 p-8 flex gap-8 md:justify-start md:w-[calc(100%-384px)] justify-center flex-wrap overflow-y-auto h-full pb-48">
+      <div className="fixed top-0 md:left-96 pt-24 pl-8 p-8 flex gap-8 md:justify-start md:w-[calc(100%-384px)] justify-center flex-wrap overflow-y-auto h-full pb-48">
         {categories
           .map((category) =>
             meta[category]
