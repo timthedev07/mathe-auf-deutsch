@@ -15,5 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as "weekly",
       priority: 0.9,
     })),
-  ];
+  ].map((each) => ({
+    ...(each as any),
+    url: `https://timthedev07.vercel.app${each.url}`,
+  }));
 }
