@@ -30,6 +30,26 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         <div className={c}>{Inhalt}</div>
       );
     },
+    h2: ({ id, ...props }) => {
+      const Inhalt = (
+        <h2
+          id={"_" + id}
+          className="text-2xl font-medium text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
+          {...props}
+        />
+      );
+      const c = "flex flex-col gap-3 mb-2 mt-8";
+
+      return id ? (
+        <Link href={`#_${id}`}>
+          <LinkCopier id={"_" + id} className={c}>
+            {Inhalt}
+          </LinkCopier>
+        </Link>
+      ) : (
+        <div className={c}>{Inhalt}</div>
+      );
+    },
     p: (props) => (
       <p
         className="text-sm md:text-base text-white/90 leading-loose md:leading-loose"

@@ -1,0 +1,43 @@
+---
+  title: "Eine Interessante Übung, mit dem Satz von Wilson"
+  description: "Eine nette Übung, die den Satz von Wilson benutzen kann."
+  coverURL: https://i.imgur.com/OrOCEXI.jpg
+  date: "2024-06-04"
+  keywords: ["Zahlentheorie"]
+---
+
+import { Img } from "@/components/mdx/Image";
+
+# Problemstellung
+
+Berechne $D = \gcd(n! + 1, (n + 1)!)$
+
+# Meine Lösung
+
+Sei $\mathbb{P}$ die Menge aller Primzahlen.
+
+Unmittelbar erinnert der Ausdruck $(n + 1)!$ einem an den Satz von Wilson, der besagt, dass
+
+```math
+(n - 1)! \equiv -1 \pmod{n} \Longleftrightarrow n \in \mathbb{P}
+```
+
+Trenne jetzt das Problem in zwei Fälle.
+
+## Fall 1: $n \in \mathbb{P}$
+
+In diesem Fall kann man sagen, dass
+
+```math
+\begin{align*}
+&n! \equiv -1 \pmod{n + 1} \\
+\Longleftrightarrow \space &n! + 1 \equiv 0 \pmod{n + 1} \\
+\Longleftrightarrow \space &n + 1 \mid n! + 1
+\end{align*}
+```
+
+Beachte, dass keine von der Menge $S = \{1, 2, \ldots, n\}$ den Ausdruck $n! + 1$ teilt, weil alle einem Rest von 1 lassen. Beachte auch, dass alle von $S$ die Nummer $(n + 1)!$ teilen $(1)$. Also ist $D = n + 1$.
+
+## Fall 2: $n \notin \mathbb{P}$
+
+Aus dem Beobachtung $(1)$ folgt dass, in diesem Fall $D = 1$.
