@@ -169,7 +169,7 @@ const Component: FC<BlogMainPageProps> = ({
               .map((each) => [each, category] as [typeof each, string])
           )
           .flat()
-          .toSorted(
+          .sort(
             (a, b) =>
               -new Date(a[0].date).valueOf() + new Date(b[0].date).valueOf()
           )
