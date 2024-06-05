@@ -1,6 +1,6 @@
 ---
   title: EGMO 2012, Frage Nr. 7
-  description: "Mein Lösungsansatz dafür"
+  description: "Ein Lösungsansatz dafür"
   coverURL: https://i.imgur.com/imQRTSu.jpg
   date: "2024-06-05"
   keywords: ["Geometrie", "EGMO"]
@@ -10,10 +10,35 @@ import { Img } from "@/components/mdx/Image";
 
 # Problemstellung
 
-Sei $\triangle ABC$ ein spitzwinkeliger Dreieck mit Umkreis $\Gamma$ und Höhenschnittpunkt $H$. Sei $K$ ein Punkt auf dem Kries $\Gamma$ und auf der anderen Seite von $BC$ als $A$. Sei $L$ die Spiegelung von $K$ an $AB$, und sei $M$ die Spiegelung von $K$ an $BC$. Sei $E$ der zweite Schnittpunkt von $\Gamma$ mit dem Umkreis des Dreiecks $BLM$. Zeige, dass die Geraden $KH$, $EM$ und $BC$ konkurrieren.
+Sei $\triangle ABC$ ein spitzwinkeliges Dreieck mit Umkreis $\Gamma$ und Höhenschnittpunkt $H$. Sei $K$ ein Punkt auf dem Kries $\Gamma$ und auf der anderen Seite von $BC$ als $A$. Sei $L$ die Spiegelung von $K$ an $AB$, und sei $M$ die Spiegelung von $K$ an $BC$. Sei $E$ der zweite Schnittpunkt von $\Gamma$ mit dem Umkreis des Dreiecks $BLM$. Zeige, dass die Geraden $KH$, $EM$ und $BC$ konkurrieren.
 
 <Img height={800} width={1200} src="https://i.imgur.com/imQRTSu.jpg" />
 
 # Meine Lösung
 
-Spiegle $H$
+Spiegle $H$ an $BC$, um den Punkt $H_A$ zu erhalten. Da $K$ die Spiegelung von $M$ und $H_A$ die Spiegelung von $H$ ist, folgt es daraus, der Punkt $P$, der Schnittpunkt von $KH$ und $EM$, ist das Streckzentrum, das das Dreieck $\triangle HPH_A$ auf dem Dreieck $\triangle MPK$ abbildet. Folglich liegt $P$ auf der Spiegelungslinie $BC$.
+
+<Img
+  width={1182}
+  height={1636}
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240605/B1.png"
+/>
+
+Bisher haben wir das Problem auf eine neue und einfachere Weise zurückgeführt: Beweise, dass $E$, $M$, $H_A$ kollinear sind.
+
+Jetzt, mit der Hilfe von Phantompunkten, konstruiere den Punkt $E'$, die die folgenden Eigenschaften erfüllt:
+
+1. $E'$ ist mit $M$ und $H_A$ kollinear.
+2. $E'$ liegt auf $\Gamma$.
+
+Die Aufgabe ist zu beweisen, dass $E = E'$, äquivalenterweise, dass $E$ auf dem Umkreis des Dreiecks $BLM$ liegt.
+
+Zuerst konstruiere die Punkte $H_B$ und $H_C$, dann die zwei Sehnenvierecke $BMH_AK$ und $ACBE'$. Die Aufgabe ist zu beweisen, dass $LE'MB$ ein Sehnenviereck ist (das beudeutet, dass der Punkt $E$ dann auf $(BLM)$ liegt)..
+
+<Img
+  width={1182}
+  height={1636}
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240605/B2.png"
+/>
+
+Ein guter Anfangspunkt ist, dass $\angle LBM + \angle LE'M = 180^\circ$ zu beweisen
