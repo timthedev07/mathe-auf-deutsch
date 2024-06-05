@@ -14,15 +14,21 @@ import Image from "next/image";
 import { truncateAtWord } from "../lib/truncateAtWord";
 import Link from "next/link";
 import { Suspense } from "react";
+import { CategoryTag } from "./CategoryTag";
 
 interface BlogMainPageProps {
   categories: string[];
   meta: Awaited<ReturnType<typeof getBlogs>>[0];
+  allKeywords: Set<string>;
 }
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
+const Component: FC<BlogMainPageProps> = ({
+  categories,
+  meta,
+  allKeywords,
+}) => {
   const params = useSearchParams();
   const pathname = usePathname();
   const t = params.get("q") || "";
@@ -71,6 +77,7 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
   const [selectedCategory, setCategory] = useState(
     () => params.get("kategorie") || ""
   );
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
   return (
     <>
       <div
@@ -117,6 +124,26 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
           color="red"
           items={items}
         ></Menu>
+        <ul className="w-full my-8 list-style-none flex flex-wrap gap-2 select-none">
+          {Array.from(allKeywords).map((keyword, i) => (
+            <CategoryTag
+              onClick={() => {
+                if (selectedLabel === keyword) {
+                  setSelectedLabel("");
+                  updateParams(["keyword"], [""]);
+                } else {
+                  setSelectedLabel(keyword);
+                  updateParams(["keyword"], [keyword]);
+                }
+              }}
+              index={i}
+              key={keyword}
+              selected={selectedLabel === keyword}
+            >
+              {keyword}
+            </CategoryTag>
+          ))}
+        </ul>
       </div>
       <FloatButton
         className="md:invisible"
@@ -134,7 +161,8 @@ const Component: FC<BlogMainPageProps> = ({ categories, meta }) => {
                     (v.title as string)
                       .toLowerCase()
                       .includes(t.toLowerCase())) &&
-                  (!selectedCategory || category === selectedCategory)
+                  (!selectedCategory || category === selectedCategory) &&
+                  (!selectedLabel || v.keywords.includes(selectedLabel))
               )
               .map((each) => [each, category] as [typeof each, string])
           )
