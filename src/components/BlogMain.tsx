@@ -77,7 +77,9 @@ const Component: FC<BlogMainPageProps> = ({
   const [selectedCategory, setCategory] = useState(
     () => params.get("kategorie") || ""
   );
-  const [selectedLabel, setSelectedLabel] = useState<string>("");
+  const [selectedLabel, setSelectedLabel] = useState<string>(
+    params.get("keyword") || ""
+  );
   return (
     <>
       <div

@@ -4,6 +4,7 @@ import Image from "next/image";
 interface ImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width: number;
   height: number;
+  src: string;
 }
 
 export const Img: FC<ImgProps> = ({ alt, src, height, width, ...props }) => {
