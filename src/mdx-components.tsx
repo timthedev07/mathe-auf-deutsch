@@ -56,6 +56,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+    ol: (props) => (
+      <ol
+        className="list-[lower-greek] list-inside leading-loose pl-4 text-white"
+        {...props}
+      ></ol>
+    ),
     ...components,
   };
 }

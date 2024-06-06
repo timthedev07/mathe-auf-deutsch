@@ -33,7 +33,7 @@ Jetzt, mit der Hilfe von Phantompunkten, konstruiere den Punkt $E'$, die die fol
 
 Die Aufgabe ist zu beweisen, dass $E = E'$, äquivalenterweise, dass $E$ auf dem Umkreis des Dreiecks $BLM$ liegt.
 
-Zuerst konstruiere die Punkte $H_B$ und $H_C$, dann die zwei Sehnenvierecke $BMH_AK$ und $ACBE'$. Die Aufgabe ist zu beweisen, dass $LE'MB$ ein Sehnenviereck ist (das beudeutet, dass der Punkt $E$ dann auf $(BLM)$ liegt)..
+Zuerst konstruiere die Punkte $H_B$ und $H_C$, dann die zwei Sehnenvierecke $E'H_CBH_A$ und $ACBE'$. Die Aufgabe ist zu beweisen, dass $LE'MB$ ein Sehnenviereck ist (das beudeutet, dass der Punkt $E$ dann auf $(BLM)$ liegt)..
 
 <Img
   width={1182}
@@ -41,4 +41,46 @@ Zuerst konstruiere die Punkte $H_B$ und $H_C$, dann die zwei Sehnenvierecke $BMH
   src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240605/B2.png"
 />
 
-Ein guter Anfangspunkt ist, dass $\angle LBM + \angle LE'M = 180^\circ$ zu beweisen
+Ein guter Anfangspunkt ist, dass $\angle LBM + \angle LE'M = 180^\circ$ zu beweisen (in diesem Fall ist $LEMB$ ein Sehnenviereck).
+
+Der Winkel $\angle LBM$ ist gleich $\angle LBH_A - \angle MBH_A$, auch $\angle LBK = 2\angle ABK$, weil $L$ ist die Spiegelung von $K$ an $AB$. Gleicherweise $\angle CBK = \angle MBC$, weil $K$ die Spiegelung des Punktes $M$ an $BC$ ist. Dann
+
+```math
+\begin{align*}
+\space\angle LBM = &\space\angle LBK - \angle MBK \\
+= &\space 2\angle ABK - 2\angle CBK \\
+= &\space 2(\angle ABK - \angle CBK) \\
+= &\space 2\angle ABC \\
+\end{align*}
+```
+
+Beachte, dass $\angle H_CBH_A + \angle H_AE'H_C = 180^\circ$ in dem Sehnenviereck $E'H_CBH_A$ (diesen Sehnenviereck benutzen wir, weil $E'$ auf $\Gamma$ liegt).
+
+Da $L$ und $H_C$ die Spiegelungen von $K$ bzw. $H$ an $AB$ sind, haben wir $\angle BH_CL = \angle BHK$ (sehe das Folgenden Diagramm)
+
+<Img
+  width={1182}
+  height={1636}
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240605/B3.png"
+/>
+
+Noch einmal, der Spiegelungspunkt $M$ von $K$ und $H_A$ von $H$ an $BC$ impliziert, dass $\angle BHK = \angle MH_AB$
+
+<Img
+  width={1182}
+  height={1636}
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240605/B4.png"
+/>
+
+Dann in dem Sehnenviereck $H_CBH_AE'$, $\angle MH_AB = 180^\circ - \angle E'H_CB$. Also $\angle BH_CL = 180^\circ - \angle E'H_CB$. Deswegen sind $L$, $H_C$, $E'$ kollinear.
+
+Da $L$, $H_C$, $E'$ kollinear sind, haben wir $\angle LE'M = \angle H_CE'M = 180^\circ - H_CBH_A = 180^\circ - 2\angle ABC$. Endlich $\angle LE'M + \angle LBM = 180^\circ - 2\angle ABC + 2\angle ABC = 180^\circ$.
+
+<div className="text-right">$\square$</div>
+
+<Img
+  width={1182}
+  height={1636}
+  alt="Warum ist der Winkel H_CBH_A gleich 2*ABC?"
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240605/B5.png"
+/>
