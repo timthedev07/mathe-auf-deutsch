@@ -1,0 +1,39 @@
+---
+  title: "Eine Nette Übung zum Satz von Euler"
+  description: ""
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/der-satz-von-euler-uebung.jpg
+  date: "2024-06-07"
+  keywords: ["Zahlentheorie"]
+---
+
+import { Img } from "@/components/mdx/Image";
+
+# Problemstellung
+
+Beweise, dass für jede ungerade Nummer $n$
+
+```math
+n \mid 2^{n!} - 1
+```
+
+# Meine Lösung
+
+Der Satz von Euler besagt, dass für jede $n\ge 2$ und $\gcd(n, a) = 1$
+
+```math
+a^{\phi(n)} - 1 \equiv 0 \pmod{n}
+```
+
+Sei $a = 2$, dann ist $\gcd(2, n) = 1$ für jede ungerade Nummer $n$. Also
+
+```math
+2^{\phi(n)} - 1 \equiv 0 \pmod{n}
+```
+
+Also, das Problem ist tatsächlich
+
+> Beweise, dass $\phi(n) \mid n!$ für jede ungerade Nummer $n$.
+
+Die Lösung ist eigentlich sehr einfach. Da $\phi(n) < n$, dann $\phi(n) \in \{1, 2, \ldots, n - 1\}$.
+
+Deswegen $\phi(n) \mid n(n - 1)(n - 2)\ldots = n!$

@@ -62,6 +62,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       ></ol>
     ),
+    blockquote: (props) => (
+      <blockquote
+        className="text-white/90 border-l-4 border-cyan-400/60 italic pl-4"
+        {...props}
+      />
+    ),
     ...components,
   };
 }
