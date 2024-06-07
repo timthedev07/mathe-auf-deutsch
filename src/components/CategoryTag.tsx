@@ -40,7 +40,7 @@ export const CategoryTag: FC<CategoryTagProps> = ({
     <li
       {...props}
       className={
-        "select-none transition duration-300 cursor-pointer rounded-full px-2.5 w-min font-medium py-1 text-sm " +
+        "select-none transition duration-300 cursor-pointer rounded-full px-2.5 w-max font-medium py-1 text-sm " +
         (selected
           ? SELECTED_COLORS[index % COLORS.length] +
             " text-slate-100 shadow-2xl ring-2"
