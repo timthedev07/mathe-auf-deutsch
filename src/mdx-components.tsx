@@ -12,7 +12,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         <>
           <h1
             id={id}
-            className="text-3xl font-semibold text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
+            className="scroll-my-32 text-3xl font-semibold text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
             {...props}
           />
           <Hr />
@@ -34,7 +34,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const Inhalt = (
         <h2
           id={"_" + id}
-          className="text-2xl font-medium text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
+          className="scroll-my-32 text-2xl font-medium text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
           {...props}
         />
       );

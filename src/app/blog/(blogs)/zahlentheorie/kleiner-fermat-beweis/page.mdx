@@ -1,0 +1,85 @@
+---
+  title: "Kleiner Fermat - Ein Beweis"
+  description: ""
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/kleiner-fermat-beweis.jpg
+  date: "2024-06-07"
+  keywords: ["Zahlentheorie", "Primtzahl", "Kleiner Fermat"]
+---
+
+import { Img } from "@/components/mdx/Image";
+import { Lemma, LemmaRef } from "@/components/mdx/Lemma";
+
+# Der Satz
+
+Der Satz der kleinen Fermat besagt, wenn $p$ eine Primzahl ist und $\gcd(a, p) = 1$
+
+```math
+a^{p} \equiv a \pmod{p}
+```
+
+# Ein Hilfssatz
+
+<Lemma num={1}>
+Beginne mit $\text{Lemma 1.}$
+
+```math
+(a + b)^p \equiv a^p + b^p \pmod{p}
+```
+
+Der Beweis ist wie folgt:
+
+```math
+\begin{align*}
+(a + b)^p &\equiv a^p + {p\choose 1}a^{p - 1}b + {p\choose 2}a^{p - 2}b^2 + \ldots + b^p \pmod{p} \\
+\end{align*}
+```
+
+Der Binomialkoeffizient ${p\choose k} = \frac{p!}{k!(p-k)!}$. Für alle $1 \leq k \leq p - 1$ ist $p$ ein Teiler von ${p\choose k}$, also ist ${p\choose k} \equiv 0 \pmod{p}$.
+
+Dann
+
+```math
+\begin{align*}
+&a^p + {p\choose 1}a^{p - 1}b + {p\choose 2}a^{p - 2}b^2 + \ldots + b^p \\
+\equiv \space &  a^p + 0 + 0 + \ldots + 0 + b^p \pmod{p} \\
+\equiv \space &  a^p + b^p \pmod{p}
+\end{align*}
+```
+
+</Lemma>
+
+# Der Beweis
+
+Dieser Beweis benutzt Induktion nach $a$.
+
+Die Induktionsverankerung ist trivial. Falls $a = 1$,
+
+```math
+\begin{align*}
+a^p \equiv 1^p \equiv 1 \pmod{p}
+\end{align*}
+```
+
+Angenommen, dass die folgende Eigenschaft für alle $a \le k$ gilt
+
+```math
+k^p \equiv k \pmod{p}
+```
+
+Dann müssen wir zeigen, dass die Eigenschaft auch für $k + 1$ gilt, d.h.
+
+```math
+(k + 1)^p \equiv k + 1 \pmod{p}
+```
+
+Das ist eigentlich einfach. Mit <LemmaRef num={1} /> haben wir
+
+```math
+\begin{align*}
+(k + 1)^p \equiv k^p + 1^p \equiv k + 1 \pmod{p}
+\end{align*}
+```
+
+# Schlussfolgerung
+
+Tatsächlich habe ich durch diesen Artikel gelernt, dass man normalerweise _angenommen, ..._ statt _nehme an, ..._ benutzt! Was für eine Überraschung!
