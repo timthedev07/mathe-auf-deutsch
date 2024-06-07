@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { BlogAside } from "../../../components/BlogAside";
 import { headers } from "next/headers";
-import { join, resolve } from "path";
-import { readFile, readdir } from "fs/promises";
+import { join } from "path";
+import { readFile } from "fs/promises";
 import { extractHeadings } from "../../../lib/extractHeadings";
 import data from "../../../headings.json";
 

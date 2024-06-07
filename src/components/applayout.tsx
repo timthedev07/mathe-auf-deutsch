@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Nav } from "./layout/nav";
 import { GitHubCorner } from "./layout/GHCorner";
+import { WithToaster } from "./layout/WithToaster";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -8,10 +9,10 @@ interface AppLayoutProps {
 
 export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div>
+    <WithToaster>
       <Nav />
       <GitHubCorner href="https://github.com/timthedev07/mathe-auf-deutsch" />
       {children}
-    </div>
+    </WithToaster>
   );
 };

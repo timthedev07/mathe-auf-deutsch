@@ -1,5 +1,6 @@
 "use client";
 import { FC, ReactNode } from "react";
+import { toast } from "sonner";
 
 interface LinkCopierProps {
   id?: string;
@@ -21,6 +22,7 @@ export const LinkCopier: FC<LinkCopierProps> = ({
           window.navigator.clipboard.writeText(
             s.slice(0, s.indexOf("#")) + "#" + id
           );
+          toast.success("Link copied to clipboard");
         }
       }}
     >
