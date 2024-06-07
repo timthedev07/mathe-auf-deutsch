@@ -18,7 +18,7 @@ export const Img: FC<ImgProps> = ({ alt, src, height, width, ...props }) => {
         alt={alt || ""}
         {...props}
       />
-      <caption className="w-[600px] mt-4 italic text-white/90">{alt}</caption>
+      <span className="w-[600px] mt-4 italic text-white/90">{alt}</span>
     </div>
   );
 };
