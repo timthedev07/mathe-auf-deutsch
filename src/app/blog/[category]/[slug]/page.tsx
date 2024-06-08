@@ -1,14 +1,11 @@
 import { FC } from "react";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import rehypeSlug from "rehype-slug";
-import { compileMDX } from "next-mdx-remote/rsc";
 import { readFile, readdir } from "fs/promises";
 import { join } from "path";
 import { BlogAside } from "../../../../components/BlogAside";
 import headings from "@/headings.json";
 import { mdxComponents } from "../../../../mdx-components";
+import { getBlogMetadata } from "../../../../lib/seo";
+import { compileMDX } from "../../../../lib/compileMDX";
 
 type Props = {
   params: {
@@ -31,22 +28,23 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
   return identifiers;
 }
 
+// or Dynamic metadata
+export async function generateMetadata({
+  params: { category, slug },
+}: {
+  params: Props["params"];
+}) {
+  const fpath = join(process.cwd(), "blogs", category, slug, "page.mdx");
+  const { frontmatter } = await compileMDX(await readFile(fpath, "utf-8"));
+  return getBlogMetadata({ ...frontmatter });
+}
+
 const Page: FC<Props> = async ({ params: { category, slug } }) => {
   const fpath = join(process.cwd(), "blogs");
   let raw = await readFile(join(fpath, category, slug, "page.mdx"), "utf-8");
   raw = raw.replace(/^import\b.*/g, "");
 
-  const { content } = await compileMDX({
-    source: raw,
-    options: {
-      mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkMath],
-        rehypePlugins: [rehypeKatex, rehypeSlug],
-      },
-      parseFrontmatter: true,
-    },
-    components: mdxComponents,
-  });
+  const { content } = await compileMDX(raw);
 
   return (
     <>
