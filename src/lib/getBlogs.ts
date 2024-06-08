@@ -4,16 +4,14 @@ import { join } from "path";
 import { Meta } from "../types/meta";
 
 export const getBlogs = async () => {
-  const categories = (
-    await readdir(join(process.cwd(), "src", "app", "blog", "(blogs)"))
-  ).filter((each) => each.search(/\./) === -1);
-  const base = join(process.cwd(), "src", "app", "blog", "(blogs)");
+  const base = join(process.cwd(), "blog");
+  const categories = (await readdir(base)).filter(
+    (each) => each.search(/\./) === -1
+  );
   const blogs: Record<string, Meta[]> = {};
   for (const category of categories) {
     if (category.search(/\./) !== -1) continue;
-    const entries = await readdir(
-      join(process.cwd(), "src", "app", "blog", "(blogs)", category)
-    );
+    const entries = await readdir(join(base, category));
     const meta = await Promise.all(
       entries.map(async (entry) => {
         const src = await readFile(

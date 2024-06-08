@@ -4,9 +4,9 @@ import { readdir, readFile, writeFile } from "fs/promises";
 
 (async () => {
   const base = process.cwd();
-  const blogsDir = path.join(base, "src", "app", "blog", "(blogs)");
+  const blogsDir = path.join(base, "blogs");
   const categories = (await readdir(blogsDir)).filter(
-    (each) => each !== "layout.tsx"
+    (each) => each.search(/\./) === -1
   );
   const files = await Promise.all(
     categories.map((each) => readdir(path.join(blogsDir, each)))

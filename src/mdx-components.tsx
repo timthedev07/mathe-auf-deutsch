@@ -1,11 +1,14 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { LinkCopier } from "./components/mdx/LinkCopier";
-import Image from "next/image";
+import { Img } from "./components/mdx/Image";
+import { Lemma, LemmaRef } from "./components/mdx/Lemma";
 
 const Hr = () => <hr className="h-0 border-1 border-slate-200/30" />;
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(
+  components: MDXComponents = {}
+): MDXComponents {
   return {
     h1: ({ id, ...props }) => {
       const Inhalt = (
@@ -68,6 +71,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+    Img: Img,
+    Lemma: Lemma,
+    LemmaRef: LemmaRef,
     ...components,
   };
 }
