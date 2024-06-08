@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"yarn watch\"",
     "prebuild": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} ./scripts/heading.ts",
-    "watch": "ts-node-dev --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} --respawn ./scripts/heading.ts",
+    "watch": "ts-node-dev --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} --respawn --watch blogs/**/*.mdx ./scripts/heading.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
