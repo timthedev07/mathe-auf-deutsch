@@ -4,7 +4,7 @@ import { join } from "path";
 import { Meta } from "../types/meta";
 
 export const getBlogs = async () => {
-  const base = join(process.cwd(), "blog");
+  const base = join(process.cwd(), "blogs");
   const categories = (await readdir(base)).filter(
     (each) => each.search(/\./) === -1
   );
