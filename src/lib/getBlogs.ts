@@ -6,11 +6,11 @@ import { Meta } from "../types/meta";
 export const getBlogs = async () => {
   const categories = (
     await readdir(join(process.cwd(), "src", "app", "blog", "(blogs)"))
-  ).filter((each) => each !== "layout.tsx");
+  ).filter((each) => each.search(/\./) === -1);
   const base = join(process.cwd(), "src", "app", "blog", "(blogs)");
   const blogs: Record<string, Meta[]> = {};
   for (const category of categories) {
-    if (category === "layout.tsx") continue;
+    if (category.search(/\./) !== -1) continue;
     const entries = await readdir(
       join(process.cwd(), "src", "app", "blog", "(blogs)", category)
     );
