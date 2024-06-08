@@ -33,7 +33,9 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
 
 const Page: FC<Props> = async ({ params: { category, slug } }) => {
   const fpath = join(process.cwd(), "blogs");
-  const raw = await readFile(join(fpath, category, slug, "page.mdx"), "utf-8");
+  let raw = await readFile(join(fpath, category, slug, "page.mdx"), "utf-8");
+  raw = raw.replace(/^import\b.*/g, "");
+
   const { content } = await compileMDX({
     source: raw,
     options: {
