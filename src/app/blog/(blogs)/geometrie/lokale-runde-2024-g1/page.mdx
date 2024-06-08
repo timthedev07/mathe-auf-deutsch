@@ -1,0 +1,45 @@
+---
+  title: "Spanische Mathematik-Olympiade 2024, Die Lokale Runde, G1"
+  description: "Meine Lösung dafür"
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/lokale-runde-2024-g1.jpg
+  date: "2024-06-08"
+  keywords: []
+---
+
+import { Img } from "@/components/mdx/Image";
+import { Lemma, LemmaRef } from "@/components/mdx/Lemma";
+
+# Die Problemstellung
+
+ABC sei ein spitzwinkliges Dreieck und D der Punkt auf AB, der der Fußpunkt der Höhe von C ist. P sei ein beliebiger Punkt auf der Seite BC. Die Länge AP und CD schneiden sich im Punkt E, und die Länge BE und AC schneiden sich im Punkt Q. Beweise, dass CD die Winkelhalbierende des Winkels $\angle PDQ$ ist.
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/lokale-runde-2024-g1.jpg"
+  height={1200}
+  width={1800}
+  alt="Diagramm"
+/>
+
+# Meine Lösung
+
+Zuerst konstruieren wir den Umkreis von $\triangle DBC$. Dann verlängere $DQ$ und $DP$ bis zum Umkreis von $\triangle DBC$ und nenne die Schnittpunkte $Q'$ bzw. $P'$.
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240608/A1.png"
+  width={1182}
+  height={1636}
+  alt="Diagramm"
+/>
+
+Da $\angle CDB = 90^\circ$, ist $BC$ der Durchmesser des Umkreises von $\triangle DBC$. Daher ist $BC$ die Mittelsenkrechte von $Q'P'$. Hieraus ergibt sich, dass $Q'C = P'C$, das Äquivalent ist dass, $\angle CQ'P' = \angle CP'Q'$. $\text{(1)}$
+
+Weiterhin wissen wir, dass $DQ'CP'$ ein Sehnenviereck ist, also $\angle Q'DC = \angle Q'P'C = \alpha$ und $\angle P'DC = \angle P'Q'C = \beta$. $\text{(2)}$
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240608/A2.png"
+  width={1182}
+  height={1636}
+  alt="Diagramm"
+/>
+
+Aus $\text{(1)}$ und $\text{(2)}$ folgt, dass $\alpha = \beta$.
