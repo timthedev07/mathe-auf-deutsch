@@ -28,12 +28,14 @@ interface CategoryTagProps
   extends DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> {
   index: number;
   selected: boolean;
+  hasRing?: boolean;
 }
 
 export const CategoryTag: FC<CategoryTagProps> = ({
   index,
   children,
   selected,
+  hasRing = true,
   ...props
 }) => {
   return (
@@ -43,7 +45,8 @@ export const CategoryTag: FC<CategoryTagProps> = ({
         "select-none transition duration-300 cursor-pointer rounded-full px-2.5 w-max font-medium py-1 text-sm " +
         (selected
           ? SELECTED_COLORS[index % COLORS.length] +
-            " text-slate-100 shadow-2xl ring-2"
+            " text-slate-100 shadow-2xl " +
+            `${hasRing ? "ring-2" : ""}`
           : COLORS[index % COLORS.length] + " text-slate-300/80")
       }
     >

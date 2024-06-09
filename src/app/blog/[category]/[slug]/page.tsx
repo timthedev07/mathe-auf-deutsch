@@ -3,9 +3,13 @@ import { readFile, readdir } from "fs/promises";
 import { join } from "path";
 import { BlogAside } from "../../../../components/BlogAside";
 import headings from "@/headings.json";
-import { mdxComponents } from "../../../../mdx-components";
+import { FaArrowDown } from "react-icons/fa6";
 import { getBlogMetadata } from "../../../../lib/seo";
 import { compileMDX } from "../../../../lib/compileMDX";
+import Image from "next/image";
+import { IoIosArrowRoundDown } from "react-icons/io";
+import { CalendarOutlined } from "@ant-design/icons";
+import { CategoryTag } from "../../../../components/CategoryTag";
 
 type Props = {
   params: {
@@ -44,14 +48,49 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
   let raw = await readFile(join(fpath, category, slug, "page.mdx"), "utf-8");
   raw = raw.replace(/^import\b.*/g, "");
 
-  const { content } = await compileMDX(raw);
+  const { content, frontmatter } = await compileMDX(raw);
 
   return (
     <>
       <BlogAside headings={(headings as any)[`${category}/${slug}`]} />
-      <div className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-24 pb-64">
+      <main className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-24 pb-64">
+        <header className="md:w-7/10 w-8/10 mt-12">
+          <h1 className="font-bold text-white text-4xl border-b-4 pb-1 border-b-cyan-400/60 transition duration-200 hover:border-b-cyan-400/80 text-center w-max mx-auto">
+            {frontmatter.title}
+          </h1>
+          <h2 className="text-white/80 text-lg text-center mt-6">
+            <CalendarOutlined />{" "}
+            {Intl.DateTimeFormat("de-DE", { dateStyle: "full" }).format(
+              new Date(frontmatter.date)
+            )}
+          </h2>
+          <ul className="w-full flex justify-center gap-4 my-6">
+            {frontmatter.keywords.map((each, index) => (
+              <CategoryTag hasRing={false} key={each} index={index} selected>
+                {each}
+              </CategoryTag>
+            ))}
+          </ul>
+          <div className="max-w-[800px] mx-auto mt-8">
+            <Image
+              src={frontmatter.coverURL}
+              alt={frontmatter.title}
+              width={1200}
+              height={800}
+              className="rounded-lg"
+            ></Image>
+          </div>
+          {frontmatter.description && (
+            <div className="max-w-[800px] mx-auto mt-8 initial-letter">
+              {frontmatter.description}
+            </div>
+          )}
+        </header>
+        <div className="mx-auto my-24 w-full">
+          <IoIosArrowRoundDown className="mx-auto mt-8 mx-auto w-full h-24 animate-pulse text-sky-200" />
+        </div>
         {content}
-      </div>
+      </main>
     </>
   );
 };
