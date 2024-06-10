@@ -184,11 +184,11 @@ const Component: FC<BlogMainPageProps> = ({
                 />
               </div>
               <h2 className="text-white/90 font-semibold text-lg mt-3 h-12">
-                {truncateAtWord(each.title, 38)}
+                {truncateAtWord(each.title || "", 38)}
               </h2>
               <hr className="h-0 border-1 border-slate-400/30 my-4" />
               <p className="h-20 text-sm">
-                {truncateAtWord(each.description, 80)}
+                {truncateAtWord(each.description || "", 80)}
               </p>
               <Link className="w-full" href={`/blog/${category}/${each.slug}`}>
                 <Button
