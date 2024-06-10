@@ -62,6 +62,12 @@ export const mdxComponents: MDXComponents = {
       {...props}
     ></ol>
   ),
+  ul: (props) => (
+    <ul
+      className="list-disc list-inside leading-loose pl-4 text-white"
+      {...props}
+    ></ul>
+  ),
   blockquote: (props) => (
     <blockquote
       className="text-white/90 border-l-4 border-cyan-400/60 italic pl-4"
