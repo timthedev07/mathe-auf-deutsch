@@ -47,7 +47,7 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
         </h1>
         <hr className="h-0 mt-3 mb-6 border-1 border-slate-300/20" />
         <ol className="">
-          {headings.map((h) => (
+          {(headings || []).map((h) => (
             <li
               key={h[0]}
               onClick={() => {

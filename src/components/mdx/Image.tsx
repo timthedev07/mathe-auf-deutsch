@@ -26,7 +26,6 @@ export const Img: FC<ImgProps> = ({
       width={width}
       height={height}
       loading="lazy"
-      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
       className="rounded-lg"
       src={src || ""}
       alt={alt || ""}
