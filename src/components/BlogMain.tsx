@@ -15,6 +15,7 @@ import { truncateAtWord } from "../lib/truncateAtWord";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CategoryTag } from "./CategoryTag";
+import { getBlurDataURL } from "../lib/blur";
 
 interface BlogMainPageProps {
   categories: string[];
@@ -179,6 +180,8 @@ const Component: FC<BlogMainPageProps> = ({
                 <Image
                   alt={each.title}
                   src={each.coverURL}
+                  placeholder="blur"
+                  blurDataURL={getBlurDataURL(288, 198)}
                   fill
                   className="object-cover"
                 />

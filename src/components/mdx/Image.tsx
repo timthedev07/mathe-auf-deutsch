@@ -2,6 +2,7 @@ import { FC } from "react";
 import Image from "next/image";
 import { Tooltip } from "antd";
 import Link from "next/link";
+import { getBlurDataURL } from "../../lib/blur";
 
 interface ImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width: number;
@@ -29,6 +30,8 @@ export const Img: FC<ImgProps> = ({
       className="rounded-lg"
       src={src || ""}
       alt={alt || ""}
+      placeholder="blur"
+      blurDataURL={getBlurDataURL(width, height)}
       {...props}
     />
   );
