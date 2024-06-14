@@ -59,7 +59,7 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
               }}
               className={`${
                 st[h[1]]
-              } list-disc list-inside break-all my-1 rounded-md hover:bg-slate-400/20 px-2 py-1 transition duration-200 hover:text-white cursor-pointer`}
+              } list-disc list-inside break-words my-1 rounded-md hover:bg-slate-400/20 px-2 py-1 transition duration-200 hover:text-white cursor-pointer`}
             >
               {h[0]}
             </li>
