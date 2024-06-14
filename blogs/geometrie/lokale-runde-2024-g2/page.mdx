@@ -22,3 +22,27 @@ _Übersetzt mit DeepL.com_
 />
 
 # Meine Lösung
+
+Zuerst bemerken wir, dass der Punkt $I$ der Mittelpunkt der Dianogale $BD$. Dann kann man einen Kreis mit dem Durchmesser $BD$ und dem Mittelpunkt $I$ zeichnen. Dieser Kreis sei $\Gamma$. Der Punkt $F$ liegt auf $\Gamma$, weil $\angle BFD = 90^\circ$.
+
+Gleicherweise kann man einen Kreis $\Omega$ mit dem Durchmesser $AC$ und dem Mittelpunkt $J$ zeichnen, der durch $E$ geht.
+
+Bisher haben wir zwei besondere Kreise mit Mittelpunkten $I$ und $J$. Erinnern wir und daran, dass die Radikalachse von zwei Kreisen senkrecht verlaufend zu der Linie ist, die die Mittelpunkte der zwei Kreise verbindet. Tatsächlich erhalten wir ein Äquivalent der originellen Problemstellung; es ist als folgt:
+
+> Beweise, dass die Linie $KL$ eigentlich die Radikalachse von $\Gamma$ und $\Omega$ ist.
+
+Oder noch einfacher: Beweise, dass $\text{Pow}_\Gamma(K) = \text{Pow}_\Omega(K)$ und $\text{Pow}_\Gamma(L) = \text{Pow}_\Omega(L)$.
+
+Dann wird das Problem sehr einfach. Im rechtwinkligen Dreieck $\triangle DHK$ liegt noch ein rechtwinkliges Dreieck $\triangle KGC$ &mdash; diese Dreiecke sind ähnlich. Daraus folgt, dass
+
+```math
+\begin{align*}
+\frac{KH}{KD} &= \frac{KG}{KC} \\ \\
+KC\cdot KH &= KG\cdot KD \\
+\text{Pow}_\Gamma(K) &= \text{Pow}_\Omega(K)
+\end{align*}
+```
+
+Auf der anderen Seite ist die Situation für $L$ symmetrisch.
+
+<div className="text-right w-min ml-auto">$\square$</div>
