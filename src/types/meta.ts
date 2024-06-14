@@ -8,5 +8,6 @@ export type Meta = {
   coverCredit?: {
     author: string;
     originalURL: string;
+    platform: string;
   };
 };

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { CalendarOutlined } from "@ant-design/icons";
 import { CategoryTag } from "../../../../components/CategoryTag";
+import Link from "next/link";
 
 type Props = {
   params: {
@@ -78,7 +79,23 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
               height={800}
               className="rounded-lg"
             ></Image>
-            <div>{JSON.stringify(frontmatter.coverCredit)}</div>
+            {!!frontmatter.coverCredit ? (
+              <div className="text-center w-max mx-auto mt-6 border-b-4 transition duration-200 pb-1 border-transparent hover:border-b-cyan-500">
+                <Link
+                  href={frontmatter.coverCredit.originalURL}
+                  className="text-white/70"
+                >
+                  Von{" "}
+                  <i className="text-white/90">
+                    {frontmatter.coverCredit.author}
+                  </i>{" "}
+                  auf{" "}
+                  <b className="text-white/90">
+                    {frontmatter.coverCredit.platform}
+                  </b>
+                </Link>
+              </div>
+            ) : null}
           </div>
           {frontmatter.description && (
             <div className="max-w-[800px] mx-auto mt-8 initial-letter">
@@ -86,7 +103,7 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
             </div>
           )}
         </header>
-        <div className="mx-auto my-24 w-full">
+        <div className="mx-auto mt-16 mb-24 w-full">
           <IoIosArrowRoundDown className="mx-auto mt-8 mx-auto w-full h-24 animate-pulse text-sky-200" />
         </div>
         {content}
