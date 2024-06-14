@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LinkCopier } from "./components/mdx/LinkCopier";
 import { Img } from "./components/mdx/Image";
 import { Lemma, LemmaRef } from "./components/mdx/Lemma";
+import { InTextRef, WorksCited } from "./components/mdx/WorksCited";
 
 const Hr = () => <hr className="h-0 border-1 border-slate-200/30" />;
 
@@ -77,4 +78,6 @@ export const mdxComponents: MDXComponents = {
   Img: Img,
   Lemma: Lemma,
   LemmaRef: LemmaRef,
+  WorksCited: WorksCited,
+  InTextRef: InTextRef,
 };

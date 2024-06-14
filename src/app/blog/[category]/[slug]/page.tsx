@@ -6,7 +6,6 @@ import headings from "@/headings.json";
 import { getBlogMetadata } from "../../../../lib/seo";
 import { compileMDX } from "../../../../lib/compileMDX";
 import Image from "next/image";
-import { IoIosArrowRoundDown } from "react-icons/io";
 import { CalendarOutlined } from "@ant-design/icons";
 import { CategoryTag } from "../../../../components/CategoryTag";
 import Link from "next/link";
@@ -103,9 +102,6 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
             </div>
           )}
         </header>
-        <div className="mx-auto mt-16 mb-24 w-full">
-          <IoIosArrowRoundDown className="mx-auto mt-8 mx-auto w-full h-24 animate-pulse text-sky-200" />
-        </div>
         {content}
       </main>
     </>
