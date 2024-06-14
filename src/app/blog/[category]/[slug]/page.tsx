@@ -3,7 +3,6 @@ import { readFile, readdir } from "fs/promises";
 import { join } from "path";
 import { BlogAside } from "../../../../components/BlogAside";
 import headings from "@/headings.json";
-import { FaArrowDown } from "react-icons/fa6";
 import { getBlogMetadata } from "../../../../lib/seo";
 import { compileMDX } from "../../../../lib/compileMDX";
 import Image from "next/image";
@@ -79,6 +78,7 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
               height={800}
               className="rounded-lg"
             ></Image>
+            <div>{JSON.stringify(frontmatter.coverCredit)}</div>
           </div>
           {frontmatter.description && (
             <div className="max-w-[800px] mx-auto mt-8 initial-letter">

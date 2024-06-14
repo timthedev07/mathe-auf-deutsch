@@ -5,4 +5,8 @@ export type Meta = {
   date: string;
   keywords: string[];
   slug: string;
+  coverCredit?: {
+    author: string;
+    originalURL: string;
+  };
 };
