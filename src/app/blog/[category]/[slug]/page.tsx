@@ -84,9 +84,9 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
                   href={frontmatter.coverCredit.originalURL}
                   className="text-white/70"
                 >
-                  Von{" "}
+                  Vo{`${!!frontmatter.coverCredit.author ? "n" : "m"} `}
                   <i className="text-white/90">
-                    {frontmatter.coverCredit.author}
+                    {frontmatter.coverCredit.author && "Anonymus"}
                   </i>{" "}
                   auf{" "}
                   <b className="text-white/90">

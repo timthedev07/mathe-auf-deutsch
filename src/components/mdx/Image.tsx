@@ -36,7 +36,7 @@ export const Img: FC<ImgProps> = ({
     />
   );
   return (
-    <div className="relative max-w-[600px] mx-auto my-4">
+    <div className="relative lg:max-w-[500px] xl:max-w-[600px] sm:max-w-[400px] max-w-[320px] mx-auto my-4">
       {!!originalSource ? (
         <Tooltip
           title={`Klicken, um die Fundstellen zu sehen; (${originalSource.author})`}

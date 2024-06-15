@@ -6,7 +6,7 @@ export type Meta = {
   keywords: string[];
   slug: string;
   coverCredit?: {
-    author: string;
+    author?: string;
     originalURL: string;
     platform: string;
   };
