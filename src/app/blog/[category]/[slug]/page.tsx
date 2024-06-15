@@ -54,7 +54,7 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
       <BlogAside headings={(headings as any)[`${category}/${slug}`]} />
       <main className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-24 pb-64">
         <header className="relative md:w-7/10 w-8/10 mt-12">
-          <h1 className="relative font-bold break-all max-w-[80%] text-white text-4xl border-b-4 pb-1 border-b-cyan-400/60 transition duration-200 hover:border-b-cyan-400/80 text-center w-max mx-auto">
+          <h1 className="relative font-bold break-words max-w-[80%] text-white text-4xl border-b-4 pb-1 border-b-cyan-400/60 transition duration-200 hover:border-b-cyan-400/80 text-center w-max mx-auto">
             {frontmatter.title}
           </h1>
           <h2 className="text-white/80 text-lg text-center mt-6">
