@@ -28,7 +28,10 @@ export const WorksCited: FC<WorksCitedProps> = async ({ worksCited }) => {
       {titles.map(([title, url], ind) => (
         <li className="flex" key={url}>
           <div className="w-8 font-sans">[{ind + 1}]</div>
-          <Link className="text-cyan-600" href={url}>
+          <Link
+            className="text-cyan-400 hover:text-cyan-600 transition duration-200"
+            href={url}
+          >
             {title}
           </Link>
         </li>
