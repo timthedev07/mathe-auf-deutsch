@@ -9,7 +9,11 @@ import { readdir, readFile, writeFile } from "fs/promises";
     (each) => each.search(/\./) === -1
   );
   const files = await Promise.all(
-    categories.map((each) => readdir(path.join(blogsDir, each)))
+    categories.map(async (each) =>
+      (
+        await readdir(path.join(blogsDir, each))
+      ).filter((each) => each.search(/\./) === -1)
+    )
   );
   // [slug, [heading, hType]]
   const res: Record<string, [string, Headings][]> = {};

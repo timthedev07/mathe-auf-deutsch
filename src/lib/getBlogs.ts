@@ -11,7 +11,9 @@ export const getBlogs = async () => {
   const blogs: Record<string, Meta[]> = {};
   for (const category of categories) {
     if (category.search(/\./) !== -1) continue;
-    const entries = await readdir(join(base, category));
+    const entries = (await readdir(join(base, category))).filter(
+      (each) => each.search(/\./) === -1
+    );
     const meta = await Promise.all(
       entries.map(async (entry) => {
         const src = await readFile(
