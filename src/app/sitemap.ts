@@ -17,6 +17,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ].map((each) => ({
     ...(each as any),
-    url: `https://timthedev07.vercel.app${each.url}`,
+    url: `https://mathe-auf-deutsch.vercel.app${each.url}`,
   }));
 }
