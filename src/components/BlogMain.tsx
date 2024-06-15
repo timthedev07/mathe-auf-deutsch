@@ -128,24 +128,26 @@ const Component: FC<BlogMainPageProps> = ({
           items={items}
         ></Menu>
         <ul className="w-full my-8 list-style-none flex flex-wrap gap-2 select-none">
-          {Array.from(allKeywords).map((keyword, i) => (
-            <CategoryTag
-              onClick={() => {
-                if (selectedLabel === keyword) {
-                  setSelectedLabel("");
-                  updateParams(["keyword"], [""]);
-                } else {
-                  setSelectedLabel(keyword);
-                  updateParams(["keyword"], [keyword]);
-                }
-              }}
-              index={i}
-              key={keyword}
-              selected={selectedLabel === keyword}
-            >
-              {keyword}
-            </CategoryTag>
-          ))}
+          {Array.from(allKeywords)
+            .filter((each) => each.search(/deutschlernen/gi) === -1)
+            .map((keyword, i) => (
+              <CategoryTag
+                onClick={() => {
+                  if (selectedLabel === keyword) {
+                    setSelectedLabel("");
+                    updateParams(["keyword"], [""]);
+                  } else {
+                    setSelectedLabel(keyword);
+                    updateParams(["keyword"], [keyword]);
+                  }
+                }}
+                index={i}
+                key={keyword}
+                selected={selectedLabel === keyword}
+              >
+                {keyword}
+              </CategoryTag>
+            ))}
         </ul>
       </div>
       <FloatButton

@@ -19,6 +19,7 @@ export const LinkCopier: FC<LinkCopierProps> = ({
       onClick={() => {
         const s = window.location.href;
         if (id) {
+          console.log(s.slice(0, s.indexOf("#")) + "#" + id);
           window.navigator.clipboard.writeText(
             s.slice(0, s.indexOf("#")) + "#" + id
           );

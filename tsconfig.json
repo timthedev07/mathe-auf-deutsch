@@ -30,15 +30,5 @@
     "scripts/**/*.ts",
     "scripts/heading.ts"
   ],
-  "exclude": ["node_modules"],
-  "mdx": {
-    "plugins": [
-      "remark-math",
-      "remark-gfm",
-      "rehype-katex",
-      "remark-frontmatter",
-      ["remark-mdx-frontmatter", { "name": "metadata" }]
-    ],
-    "checkMdx": true
-  }
+  "exclude": ["node_modules"]
 }
