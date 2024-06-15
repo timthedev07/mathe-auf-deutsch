@@ -24,7 +24,7 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
 
   for (const category of categories) {
     const slugs = await readdir(join(fpath, category));
-    for (const slug of slugs) {
+    for (const slug of slugs.filter((a) => a.search(/\./) === -1)) {
       identifiers.push({ category, slug });
     }
   }
