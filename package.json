@@ -13,9 +13,9 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@ant-design/nextjs-registry": "^1.0.0",
-    "antd": "^5.17.4",
+    "antd": "^5.18.1",
     "gray-matter": "^4.0.3",
-    "next": "14.2.3",
+    "next": "14.2.4",
     "next-mdx-remote": "^5.0.0",
     "react": "^18",
     "react-dom": "^18",
@@ -25,19 +25,19 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
-    "sonner": "^1.4.41"
+    "sonner": "^1.5.0"
   },
   "devDependencies": {
     "@types/mdx": "^2.0.13",
-    "@types/node": "^20",
+    "@types/node": "^20.14.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "concurrently": "5.3.0",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "14.2.4",
     "eslint-plugin-mdx": "^3.1.5",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^3.4.4",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5"
