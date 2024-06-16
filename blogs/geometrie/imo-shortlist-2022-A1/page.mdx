@@ -1,7 +1,60 @@
 ---
   title: "IMO Shortlist 2022 A1"
   description: "Meine Lösung dafür"
-  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/lokale-runde-2024-g1.jpg
-  date: "2024-06-08"
-  keywords: ["Geometrie", "Spanische Mathematik-Olympiade"]
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/imo-shortlist-2022-A1.jpg
+  date: "2024-06-16"
+  keywords: ["Geometrie", "IMO"]
 ---
+
+# Problemstellung
+
+$(a_{n+1})$ mit $n\ge 1$ sei eine Reihe positiver reeler Zahlen, so dass
+
+```math
+a_{n+1}^2 + a_na_{n + 2} \le a_n + a_{n + 2}
+```
+
+für alle $n\in \mathbb{Z}^+$. Beweise, dass $a_2022 \le 1$.
+
+# Meine Lösung
+
+<Proof id={1}>
+Sei $x = a_{2021}$, $y = a_{2022}$, $z = a_{2023}$. Dann gilt die Ungleichung
+
+```math
+\begin{equation}
+y^2 + xz \le x + z
+\end{equation}
+```
+
+Hieraus ergibt sich, dass
+
+```math
+\begin{align*}
+y^2 & \le x + z - xz \\
+y^2 & \le -[(x-1)(z-1) - 1] \\
+y^2 &\le 1 - (x-1)(z-1) \\
+\end{align*}
+```
+
+Dann
+
+```math
+\begin{align*}
+y\in \mathbb{Z}^+ \Longleftrightarrow y^2 \ge 1 \\
+1 - (x-1)(z-1) \ge 1 \\
+(x-1)(z-1) \le 0
+\end{align*}
+```
+
+Diese Ungleichung gilt nur, wenn $x = 1$ oder $z = 1$, da $x, z \ge 1$ und die linke Seite nie negative ist. Angenommen, ohne Beschränkung der Allgemeinheit, dass $x = 1$. Aus der Ungleichung $\text{(1)}$
+
+```math
+\begin{align*}
+y^2 + z &\le 1 + z \\
+y^2 &\le 1 \\
+y = a_{2022} &\le 1
+\end{align*}
+```
+
+</Proof>

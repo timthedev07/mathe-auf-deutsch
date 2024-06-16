@@ -1,42 +1,37 @@
 "use client";
-import { FC } from "react";
-import { LinkOutlined } from "@ant-design/icons";
+import { FC, PropsWithChildren } from "react";
+import { proofLinkId } from "../../lib/mathLinkId";
 import { toast } from "sonner";
 import Link from "next/link";
-import { lemmaLinkId } from "../../lib/mathLinkId";
+import { LinkOutlined } from "@ant-design/icons";
 import { Colors } from "./colors";
 
-interface LemmaProps {
-  children: React.ReactNode;
-  num: number;
+interface ProofProps {
+  id: number;
 }
 
-export const Lemma: FC<LemmaProps> = ({ children, num }) => {
+export const Proof: FC<PropsWithChildren<ProofProps>> = ({ id, children }) => {
+  const idLink = `${proofLinkId(id)}`;
+
   const copyLink = () => {
-    if (!num) return;
+    if (!id) return;
     const href = window.location.href.split("#")[0];
-    window.navigator.clipboard.writeText(`${href}${lemmaLinkId(num)}`);
+    window.navigator.clipboard.writeText(`${href}${idLink}`);
     toast.success("Link copied to clipboard");
   };
 
-  const idLink = `${lemmaLinkId(num)}`;
-  const color = Colors[(num - 1) % Colors.length];
-
+  const color = Colors[(id - 1) % Colors.length];
   return (
     <div
       className={`relative w-full px-4 py-6 rounded-lg ${color.border} border-2 mt-8 shadow-2xl`}
     >
-      <Link
-        className="scroll-my-32"
-        id={lemmaLinkId(num).substring(1)}
-        href={idLink}
-      />
-      {num && (
+      <Link className="scroll-my-32" id={idLink.substring(1)} href={idLink} />
+      {id && (
         <div
           onClick={copyLink}
           className={`cursor-pointer hover:text-neutral-300 group transition duration-300 ${color.hoverBg} ${color.bg} absolute h-10 -top-10 left-3 w-64 rounded-t-lg text-white px-4 flex justify-between items-center`}
         >
-          Lemma {num}.
+          Proof {id}.
           <LinkOutlined className="transform group-hover:scale-[1.15] transition duration-300 group-hover:animate-wiggle" />
         </div>
       )}
@@ -45,15 +40,15 @@ export const Lemma: FC<LemmaProps> = ({ children, num }) => {
   );
 };
 
-export const LemmaRef: FC<{ num: number }> = ({ num }) => {
+export const ProofRef: FC<{ id: number }> = ({ id }) => {
   return (
     <Link
       className={`katex ${
-        Colors[(num - 1) % Colors.length].refBg
+        Colors[(id - 1) % Colors.length].refBg
       } rounded-md px-2 py-0.5`}
-      href={lemmaLinkId(num)}
+      href={proofLinkId(id)}
     >
-      Lemma {num}.
+      Proof {id}.
     </Link>
   );
 };

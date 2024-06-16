@@ -4,6 +4,7 @@ import { LinkCopier } from "./components/mdx/LinkCopier";
 import { Img } from "./components/mdx/Image";
 import { Lemma, LemmaRef } from "./components/mdx/Lemma";
 import { InTextRef, WorksCited } from "./components/mdx/WorksCited";
+import { Proof, ProofRef } from "./components/mdx/Proof";
 
 const Hr = () => <hr className="h-0 border-1 border-slate-200/30" />;
 
@@ -77,6 +78,8 @@ export const mdxComponents: MDXComponents = {
   ),
   Img: Img,
   Lemma: Lemma,
+  Proof: Proof,
+  ProofRef: ProofRef,
   LemmaRef: LemmaRef,
   WorksCited: WorksCited,
   InTextRef: InTextRef,
