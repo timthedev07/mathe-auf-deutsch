@@ -27,9 +27,55 @@ Zuerst konstrueiren wir den Punkt $A' = XB \cup CY$ wie folgt.
 
 Beobachte, dass es möglich ist, der Punkt $A'$ die Spiegelung von $A$ an $BC$ ist. Tatsächlich zaubern wir das herbei, und gucken wir daran, inwiefern das benutzt ist.
 
+Unter dieser Annahme ist der Punkt $A'$ kollinear mit A und F. Falls wir beweisen können, dass die Linie durch $A$, $F$, $A'$ tatsächlich die Radikalachse der Kreise $ABD$ und $ACE$ ist, dann sind wir fertig.
+
 <Lemma num={1}>
   Der Punkt $A'$ ist die Spiegelung von $A$ an $BC$.
-  <LemmaProof>Durch Winkelverfolgung bemerken wir dass</LemmaProof>
+  <LemmaProof>
+    Sei $\measuredangle ABX = \alpha$. Durch Winkelverfolgung im Sehnenviereck $AXBD$ bemerken ist $\measuredangle ADX = \measuredangle ABX = \alpha$.
+
+    Dann
+
+    $$
+    DA = DX \Longleftrightarrow \measuredangle DXA = \measuredangle XAD = 90^\circ - \frac{1}{2}\alpha
+    $$
+
+    Nochmal mit der Kenntnis, dass $AXBD$ ein Sehnenviereck ist, folgt
+
+    $$
+    \measuredangle DXA = \measuredangle DBA = 90^\circ - \frac{1}{2}\alpha
+    $$
+
+    Hieraus ergibt sich, dass
+
+    $$
+    \measuredangle A'BC = 180^\circ - (90^\circ - \frac{1}{2}\alpha) - \alpha = 90^\circ - \frac{1}{2}\alpha = \measuredangle DBA
+    $$
+
+    <Img
+      src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240620/winkelverfolgung.png"
+      alt="Winkelverfolgung"
+      width={1500}
+      height={1602}
+    />
+
+    Folglich ist BC die Winkelhalbierende von $\measuredangle A'BA$, analog auch von $\measuredangle ACA'$. Also ist $A'$ die Spiegelung von $A$ an $BC$.
+
+  </LemmaProof>
 </Lemma>
 
-In diesem Fall ist der Punkt $A'$ kollinear mit B und C.
+Fahren wir fort, um zu beweisen, dass $AF$ die Radikalachse der Kreise $ABD$ und $ACE$ ist. Eigentlich können wir das Problem wie folgt reduzieren
+
+> Beweise, dass $\text{Pow}_{(ABD)}(F) = \text{Pow}_{(ACE)}(F)$, da der Punkt $A$ schon ein Schnittpunkt der beiden Kreise ist, also liegt er auf die Radikalachse.
+
+Das ist aber einfach, weil $\triangle ABC \sim \triangle PED$, dann
+
+```math
+\begin{align*}
+&\space\frac{BF}{EF} = \frac{FC}{FD} \\
+\Longleftrightarrow &\space BF\cdot FD = EF\cdot FC \\
+\Longleftrightarrow &\space \text{Pow}_{(ABD)}(F) = \text{Pow}_{(ACE)}(F) \\
+\end{align*}
+```
+
+Wir sind fertig!

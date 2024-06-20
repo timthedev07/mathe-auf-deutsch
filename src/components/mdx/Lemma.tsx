@@ -61,12 +61,15 @@ export const LemmaRef: FC<{ num: number }> = ({ num }) => {
 
 export const LemmaProof: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="w-full mt-6">
-      <div className="katex">Proof</div>
-      <div className="ml-auto w-max">
+    <>
+      <hr className="h-0 mt-8 w-full border-1 border-slate-300/40" />
+      <div className="w-full mt-6">
+        <div className="katex">Proof</div>
         {children}
-        <InlineMath>\square</InlineMath>
+        <div className="ml-auto w-max">
+          <InlineMath>\square</InlineMath>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
