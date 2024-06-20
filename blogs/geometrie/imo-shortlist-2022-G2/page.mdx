@@ -1,0 +1,35 @@
+---
+title: "IMO Shortlist 2022 G2"
+description: ""
+coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/imo-shortlist-2022-G2.jpg
+date: "2024-06-19"
+keywords: ["Geometrie", "IMO"]
+---
+
+import { Lemma, LemmaProof } from "@/components/mdx/Lemma";
+
+# Problemstellung
+
+Im spitzwinkligen Dreieck ABC ist der Punkt F der Fußpunkt der Höhe von A, und P ist ein Punkt auf der Strecke AF. Die Geraden durch P, die parallel zu AC und AB verlaufen, treffen BC in D bzw. E. Die Punkte X $\not =$ A und Y $\not =$ A liegen auf den Kreisen ABD bzw. ACE, so dass DA = DX und EA = EY ist.
+
+Beweise, dass B, C, X und Y konzyklisch sind.
+
+# Meine Lösung
+
+Zuerst konstrueiren wir den Punkt $A' = XB \cup CY$ wie folgt.
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/imo-shortlist-2022-G2.jpg"
+  alt="IMO Shortlist 2022 G2"
+  width={2400}
+  height={1600}
+/>
+
+Beobachte, dass es möglich ist, der Punkt $A'$ die Spiegelung von $A$ an $BC$ ist. Tatsächlich zaubern wir das herbei, und gucken wir daran, inwiefern das benutzt ist.
+
+<Lemma num={1}>
+  Der Punkt $A'$ ist die Spiegelung von $A$ an $BC$.
+  <LemmaProof>Durch Winkelverfolgung bemerken wir dass</LemmaProof>
+</Lemma>
+
+In diesem Fall ist der Punkt $A'$ kollinear mit B und C.

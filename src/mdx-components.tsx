@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { LinkCopier } from "./components/mdx/LinkCopier";
 import { Img } from "./components/mdx/Image";
-import { Lemma, LemmaRef } from "./components/mdx/Lemma";
+import { Lemma, LemmaProof, LemmaRef } from "./components/mdx/Lemma";
 import { InTextRef, WorksCited } from "./components/mdx/WorksCited";
 import { Proof, ProofRef } from "./components/mdx/Proof";
 
@@ -81,6 +81,7 @@ export const mdxComponents: MDXComponents = {
   Proof: Proof,
   ProofRef: ProofRef,
   LemmaRef: LemmaRef,
+  LemmaProof: LemmaProof,
   WorksCited: WorksCited,
   InTextRef: InTextRef,
 };

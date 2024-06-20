@@ -1,5 +1,6 @@
 "use client";
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
+import { InlineMath } from "react-katex";
 import { LinkOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
 import Link from "next/link";
@@ -55,5 +56,17 @@ export const LemmaRef: FC<{ num: number }> = ({ num }) => {
     >
       Lemma {num}.
     </Link>
+  );
+};
+
+export const LemmaProof: FC<PropsWithChildren> = ({ children }) => {
+  return (
+    <div className="w-full mt-6">
+      <div className="katex">Proof</div>
+      <div className="ml-auto w-max">
+        {children}
+        <InlineMath>\square</InlineMath>
+      </div>
+    </div>
   );
 };
