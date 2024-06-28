@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { LinkOutlined } from "@ant-design/icons";
 import { Colors } from "./colors";
+import { InlineMath } from "react-katex";
 
 interface ProofProps {
   id: number;
@@ -50,5 +51,13 @@ export const ProofRef: FC<{ id: number }> = ({ id }) => {
     >
       Proof {id}.
     </Link>
+  );
+};
+
+export const ProofEnd: FC = () => {
+  return (
+    <div className="ml-auto w-max">
+      <InlineMath>\square</InlineMath>
+    </div>
   );
 };

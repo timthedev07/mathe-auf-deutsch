@@ -7,6 +7,8 @@ keywords: ["Geometrie", "IMO"]
 ---
 
 import { Lemma, LemmaProof } from "@/components/mdx/Lemma";
+import { ProofEnd } from "@/components/mdx/Proof";
+import { Img } from "@/components/mdx/Image";
 
 # Problemstellung
 
@@ -17,3 +19,36 @@ ABCD sei ein Parallelogramm, so dass AC = BC. Man wählt einen Punkt P auf der V
 Zuerst verlängern wir die Linie $RB$, so dass diese Linie wieder den Umkreis von $\triangle APQ$ im Punkt $B'$ schneidet.
 
 Bemerken wir, dass die Linie $AQ$ die Radikalachse der Umkreise von $\triangle ACD$ und $\triangle APQ$ sein könnte. Das ist tatsächlich wahr, weil die Punkte $A$ und $D$ die Schnittpunkte der beiden Umkreise sind, aus der Problemstellung. Also, das Problem haben wir schon darauf reduziert, dass $BRCD$ ein Sehnenviereck ist, zu beweisen.
+
+Durch Winkelverfolgung erhalten wir das Folgendes:
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240628/G1.png"
+  width={2284}
+  height={1622}
+  alt="Diagramm"
+/>
+
+Jetzt müssen wir beweisen, dass $\measuredangle DCR = \measuredangle DB'R$. Rechnen wir den Winkel $\measuredangle DCR$ aus
+
+```math
+\begin{align*}
+ \measuredangle DCR &= \beta + \measuredangle ACB + \measuredangle BCP \\
+ &= \beta + (180^\circ - 2\beta) + (180^\circ - \alpha - (180^\circ - \beta)) \\
+ &= 180^\circ - \alpha \\
+ &= -\alpha \\
+ &= \measuredangle DB'R
+\end{align*}
+```
+
+Vorsicht! Früher haben wir eigentlich die Annahme benutzt, dass $B'$, $A$, $D$ kollinear sind. Aber es fehlt noch diese Annahme zu beweisen. Das Äquivalent ist zu beweisen, dass $B'A \parallel BC$.
+
+Das ist aber trivial!
+
+```math
+\begin{align*}
+\measuredangle B'AB = 180^\circ - \beta - (180^\circ - 2\beta) = \beta = \measuredangle CBA
+\end{align*}
+```
+
+<ProofEnd />
