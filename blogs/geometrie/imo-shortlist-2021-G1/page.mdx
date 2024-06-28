@@ -1,7 +1,7 @@
 ---
 title: "IMO Shortlist 2021 G1"
 description: ""
-coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/imo-shortlist-2022-G2.jpg
+coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/imo-shortlist-2021-G1.jpg
 date: "2024-06-28"
 keywords: ["Geometrie", "IMO"]
 ---
@@ -10,4 +10,10 @@ import { Lemma, LemmaProof } from "@/components/mdx/Lemma";
 
 # Problemstellung
 
+ABCD sei ein Parallelogramm, so dass AC = BC. Man wählt einen Punkt P auf der Verlängerung des Segments AB über B hinaus. Der Umkreis des Dreiecks ACD trifft das Segment PD wieder in Q, und der Umkreis des Dreiecks APQ trifft das Segment PC wieder in R. Beweise, dass die Linien CD, AQ und BR zusammenfallen.
+
 # Meine Lösung
+
+Zuerst verlängern wir die Linie $RB$, so dass diese Linie wieder den Umkreis von $\triangle APQ$ im Punkt $B'$ schneidet.
+
+Bemerken wir, dass die Linie $AQ$ die Radikalachse der Umkreise von $\triangle ACD$ und $\triangle APQ$ sein könnte. Das ist tatsächlich wahr, weil die Punkte $A$ und $D$ die Schnittpunkte der beiden Umkreise sind, aus der Problemstellung. Also, das Problem haben wir schon darauf reduziert, dass $BRCD$ ein Sehnenviereck ist, zu beweisen.
