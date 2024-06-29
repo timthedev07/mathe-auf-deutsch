@@ -47,7 +47,7 @@ export const Img: FC<ImgProps> = ({
       ) : (
         I
       )}
-      <div className="w-[600px] mt-4 italic text-white/90 text-center">
+      <div className="w-60 mx-auto md:w-72 lg:w-[600px] mt-4 italic text-white/90 text-center">
         {alt}
       </div>
     </div>

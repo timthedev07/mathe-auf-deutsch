@@ -7,12 +7,97 @@
 ---
 
 import { Img } from "@/components/mdx/Image";
+import { Lemma, LemmaProof } from "@/components/mdx/Lemma";
 
 # Die Problemstellung
 
-Die Scheitelpunkte A, B und C eines gleichseitigen Dreiecks mit der Seite 1 liegen auf der Oberfläche einer Kugel mit dem Radius 1 und dem Mittelpunkt O. Sei D die Orthogonalprojektion von A auf die Ebene $\alpha$, die durch B, C und O bestimmt wird. Wir bezeichnen N als einen der Schnitte der Geraden, die senkrecht zu $\alpha$ durch O verläuft, mit der Kugel.
+Die Scheitelpunkte $A$, $B$ und $C$ eines gleichseitigen Dreiecks mit der Seite $1$ liegen auf der Oberfläche einer Kugel mit dem Radius $1$ und dem Mittelpunkt $O$. Sei $D$ die Orthogonalprojektion von $A$ auf die Ebene $\alpha$, die durch $B$, $C$ und $O$ bestimmt wird. Wir bezeichnen $N$ als einen der Schnitte der Geraden, die senkrecht zu $\alpha$ durch $O$ verläuft, mit der Kugel. Finden Sie das Maß des Winkels $\angle DNO$
 (Anmerkung: Die Orthogonalprojektion von A auf die Ebene $\alpha$ ist der Schnittpunkt der durch A verlaufenden und auf $\alpha$ senkrecht stehenden Geraden mit $\alpha$).
 
 Übersetzt mit DeepL.com (kostenlose Version)
 
 # Meine Lösung
+
+Diese Aufgabe, mindestens für mich, dauerte einige Zeit, bis ich mir die Konfiguration im Kopf vorgestellt habe.
+
+Anfangs untersuchen wir das Objekt ABCO.
+
+- $\triangle ABC$ ist ein gleichseitiges Dreieck mit der Seitenlänge 1, also $AB = BC = CA = 1$
+- Da A, B und C auf der Kugeloberfläche liegen, haben wir auch $OA = OB = OC = 1$
+
+Dann sind alle Seitenlängen von ABCO gleich. Das bedeutet, dass ABCO ein Tetraeder ist, der von vier gleichseitigen Dreiecken gebildet wird.
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/20240628/ome2021p1.png"
+  width={1684}
+  height={1434}
+  alt="Diagramm"
+/>
+
+Eine der Eigenschaften von Tetraedern ist, die Orthogonalprojektion einer Ecke auf die gegenüberliegende Fläsche liegt auf den Mittelpunkt davon.
+
+Ich zielte darauf ab, zuerst die Koordinaten der Punkte A, B, bzw. C auszurechnen.
+
+Betrachten wir den Umkreis $(ABC)$. Beobachten Sie, dass seine Höhe über die Ebene $z = 0$ eine Eins-zu-eins-Zuordnung zum Halbmesser des Umkreises $(ABC)$ hat. Das bedeutet, mit dem Halbmesser kann man sowohhl die Höhe des Umkreises als auch den Erhebungswinel des Punktes $A$ (analog $B$ und $C$) bestimmen. Aber jetzt die Frage: Was genau ist diese Beziehung?
+
+Fangen wir mit diesem pauschalisierten Hilfsatz an.
+
+<Lemma num={1}>
+  Sei $R$ der Radius der Kugel. Dann ist der Erhebungswinel $\theta$ des Punktes $A$, $B$ oder $C$ gleich $\arctan\left(\sqrt{\frac{R^2}{r^2} - 1}\right)$
+  <LemmaProof>
+    Die Höhe $h$ ist gleich $R\sin\theta$, und der Radius des Umkreises $(ABC)$ $r$ ist $R\cos\theta$. Also
+
+    ```math
+    \tan\theta = \frac{h}{r}
+    ```
+
+     Aus dem Satz des Pythagoras,
+
+    ```math
+    h^2 + r^2 = R^2
+    ```
+
+    Dann
+
+    ```math
+    \begin{align*}
+      r^2(1 + \tan^2\theta) &= R^2 \\
+      \tan\theta = \sqrt{\frac{R^2}{r^2} - 1}
+    \end{align*}
+    ```
+
+  </LemmaProof>
+</Lemma>
+
+In dieser Aufgabe ist $R=1$. Es fehlt nur noch, den Radius des Umkreises $(ABC)$ zu berechnen. Das ist einfach, weil $ABC$ ein gleichseitiges Dreieck ist. Der Radius ist gleich $\frac{a}{\sqrt{3}} = \frac{1}{\sqrt{3}}$.
+
+Jetzt rechnen wir den Erhebungswinkel von $A$ aus.
+
+```math
+\begin{align*}
+  \theta &= \arctan\left(\sqrt{\frac{1}{\frac{1}{3}} - 1}\right) \\
+  &= \arctan\left(\sqrt{3 - 1}\right) \\
+  &= \arctan\left(\sqrt{2}\right) \\
+  &= 60^\circ
+\end{align*}
+```
+
+Damit könnte man im Blinkwinkel der $xy$-Ebene lösen. Ich bin heute ein bisschen faul, also lasse ich das als Übung für den Leser.
+
+# Die Alternative
+
+Mit dem Fund, dass $D$ auf dem Zentrum des Dreiecks $\triangle OBC$ liegt, können wir einfach die Länge $OD$ ausrechnen.
+
+```math
+\begin{align*}
+OD = \frac{\frac{1}{2}}{\cos 30^\circ} = \frac{1}{\sqrt{3}}
+\end{align*}
+```
+
+Dann, im Dreieck $\triangle ODN$
+
+- $ON = 1$
+- $OD = \frac{1}{\sqrt{3}}$
+- $ON \perp OD$
+
+Also der gewollte Winkel $\angle DNO = \arctan\frac{1}{\sqrt{3}} = 30^\circ$.
