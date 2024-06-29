@@ -1,0 +1,48 @@
+---
+  title: "Spanische Mathematik-Olympiade 2024, Die landesweite Runde, G2"
+  description: "Meine Lösung dafür"
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/lokale-runde-2024-g2.jpg
+  date: "2024-06-14"
+  keywords: ["Geometrie", "Spanische Mathematik-Olympiade"]
+---
+
+import { Img } from "@/components/mdx/Image";
+
+# Die Problemstellung
+
+$ABCD$ sei ein Viereck. $J$ und $I$ seien die Mittelpunkte der Diagonalen $AC$ bzw. $BD$. $G$ sei der Punkt auf der Linie $BC$, so dass $DG$ senkrecht auf $BC$ stehe, und $H$ sei der Punkt auf der Linie $AD$, so dass $CH$ senkrecht auf $AD$ stehe. Die Linien $DG$ und $CH$ schneiden sich in dem Punkt $K$. $E$ sei der Punkt auf der Linie $BC$, so dass $AE$ senkrecht auf $BC$ stehe, und $F$ sei der Punkt auf der Linie $AD$, so dass $BF$ senkrecht auf $AD$ stehe. Die Geraden $AE$ und $BF$ schneiden sich im Punkt $L$. Beweisen Sie, dass $KL$ eine Senkrechte auf $JI$ ist.
+
+_Übersetzt mit DeepL.com_
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/lokale-runde-2024-g2.jpg"
+  height={1600}
+  width={2400}
+  alt="Diagramm"
+/>
+
+# Meine Lösung
+
+Zuerst bemerken wir, dass der Punkt $I$ der Mittelpunkt der Dianogale $BD$. Dann kann man einen Kreis mit dem Durchmesser $BD$ und dem Mittelpunkt $I$ zeichnen. Dieser Kreis sei $\Gamma$. Der Punkt $F$ liegt auf $\Gamma$, weil $\angle BFD = 90^\circ$.
+
+Gleicherweise kann man einen Kreis $\Omega$ mit dem Durchmesser $AC$ und dem Mittelpunkt $J$ zeichnen, der durch $E$ geht.
+
+Bisher haben wir zwei besondere Kreise mit Mittelpunkten $I$ und $J$. Erinnern wir und daran, dass die Radikalachse von zwei Kreisen senkrecht verlaufend zu der Linie ist, die die Mittelpunkte der zwei Kreise verbindet. Tatsächlich erhalten wir ein Äquivalent der originellen Problemstellung; es ist als folgt:
+
+> Beweise, dass die Linie $KL$ eigentlich die Radikalachse von $\Gamma$ und $\Omega$ ist.
+
+Oder noch einfacher: Beweise, dass $\text{Pow}_\Gamma(K) = \text{Pow}_\Omega(K)$ und $\text{Pow}_\Gamma(L) = \text{Pow}_\Omega(L)$.
+
+Dann wird das Problem sehr einfach. Im rechtwinkligen Dreieck $\triangle DHK$ liegt noch ein rechtwinkliges Dreieck $\triangle KGC$ &mdash; diese Dreiecke sind ähnlich. Daraus folgt, dass
+
+```math
+\begin{align*}
+\frac{KH}{KD} &= \frac{KG}{KC} \\ \\
+KC\cdot KH &= KG\cdot KD \\
+\text{Pow}_\Gamma(K) &= \text{Pow}_\Omega(K)
+\end{align*}
+```
+
+Auf der anderen Seite ist die Situation für $L$ symmetrisch.
+
+<div className="text-right w-min ml-auto">$\square$</div>
