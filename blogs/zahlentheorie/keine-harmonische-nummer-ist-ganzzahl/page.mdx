@@ -1,0 +1,41 @@
+---
+  title: "Beweis Dafür, dass keine harmonische Nummer eine Ganzzahl ist"
+  description: "Ein Beweis"
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/kleiner-fermat-beweis.jpg
+  date: "2024-07-13"
+  keywords: ["Zahlentheorie", "Hilfssatz"]
+---
+
+# Der Satz
+
+Zuerst geben wir die folgende Definition einer harmonische Nummer (H_n):
+
+```math
+H_n = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \dotsc + \frac{1}{n}
+```
+
+Das Problem ist jetzt, wie kann man zeigen, dass $\forall n \ge 2$, $H_n \not \in \mathbb{Z}$
+
+# Ein Beweis
+
+Wir führen diesen Beweis mit Widerspruchsbeweis durch. Angenommen, dass $H_n = m \in \mathbb{Z}$.
+
+$k$ sei die größte Potenz von $2$ im Bereich $[1, n]$, und sei $P$ das Produkt aller ungeraden Zahlen im gleichen Bereich. Hieraus ergibt sich, dass $P$ ungerade ist.
+
+$D = 2^k \times P$.
+
+Bei Multiplikation mit $D$ auf die beiden Seiten, erhalten wir
+
+```math
+\begin{align*}
+  2^kP + \frac{2^kP}{2} + \frac{2^kP}{3} + \dotsc + \frac{2^kP}{2^k} + \dotsc + \frac{2^kP}{n} = m \times 2^kP
+\end{align*}
+```
+
+Für alle $n \ge 2$, ist $k \ge 1$. Also, auf dem richtigen Seite ist $m\times 2^kP$ gerade.
+
+Aber hier bekommen wir den Widerspruch!
+
+Auf dem linken Seite kann man die Nenner aller Bruchrechnungen kürzen. Danach behalten wir einen Ausdruck da, in dem alle Terme außer $\frac{2^kP}{2^k}$ gerade sind. Dann ist die linke Seite ungerade.
+
+Es ist nie möglich, dass die zwei Seiten verschiedene Geradzahligkeiten haben!
