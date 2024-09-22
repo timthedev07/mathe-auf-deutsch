@@ -1,54 +1,28 @@
 ---
   title: "BMO2 2024 P3 - Meine Lösung"
   description: "Mein Lösungsansatz dafür"
-  coverURL: https://i.imgur.com/4bwF09E.jpg
-  date: "2024-06-02"
+  coverURL: https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/bmo2-2024-p3.png
+  date: "2024-09-22"
   keywords: ["Geometrie"]
 ---
 
 # Problemstellung
 
-Die Problemstellung ist auf Spanisch, daher habe ich sie übersetzt:
+Die Problemstellung war ursprünglich auf Englisch, daher habe ich sie übersetzt:
 
-Es seien zwei Kreise mit den Mittelpunkten $O$ und $O'$ und den Radien $r$ und $r'$, die sich in einem Punkt $A$ tangieren. Von einem beliebigen Punkt $B$ auf der gemeinsamen Tangente aus zeichnen wir die beiden anderen Tangenten an jeden der beiden gegebenen Kreise, wobei die jeweiligen Berührungspunkte $C$ und $C'$ sind. Wohin tendiert das Verhältnis der Flächeninhalte der Dreiecke $ABC$ und $ABC'$, wenn sich der Punkt $B$ entweder dem Punkt $A$ nähert oder sich unendlich weit vom Punkt $A$ entfernt?
+ABC sei ein spitzwinkliges Dreieck mit $AB > AC$. P sei der Schnittpunkt der Tangenten an den Umkreis von ABC in B und C. Die Linie durch die Mittelpunkte der Strecken PB und PC treffe die Linien AB und AC in X bzw. Y.
+
+Beweisen Sie, dass das Viereck AXPY zyklisch ist.
 
 # Meine Lösung
 
-Zuerst kann man das Diagramm mit GeoGebra zeichnen, dann bekommt man etwas wie das folgende Bild:
+Zuerst kann man das Diagramm mit GeoGebra zeichnen, durch Winkelverfolgung dann bekommt man etwas wie das folgende Bild:
 
 <Img
-  src="https://i.imgur.com/4bwF09E.jpg"
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/thumbnails/bmo2-2024-p3.png"
   alt="Problem des Monates - Juni 2024"
   width={1200}
   height={800}
 />
 
-Beachte, dass die die Längen $AB$ und $CB$ sind ebenso lang, weil sie Tangenten vom Kreis mit dem Mittelpunkt $O$, die von dem gleichen Punkt $B$ gezogen sind. Das Gleiche gilt für die Längen $AB$ und $C'B$. Daraus folgt, dass $AB = CB = C'B$. Bezeichne diese Länge mit $x$ und die Winkel $\angle ABC$ und $\angle ABC'$ mit $\alpha$ und $\beta$ jeweils. Dann kann man die Flächen der zwei Dreiecke $ABC$ und $ABC'$ wie folgt berechnen:
-
-```math
-\begin{align*}
-  [ABC]  & = \frac{1}{2} x^2 \sin\alpha \\
-  [ABC'] & = \frac{1}{2} x^2 \sin\beta  \\
-  \frac{[ABC]}{[ABC']} &= \frac{\sin\alpha}{\sin\beta}
-\end{align*}
-```
-
-Im Dreieck $\triangle ABO$, $OA = r$, $AB = x$, also $OB = \sqrt{r^2 + x^2}$. Daraus folgt, dass $\sin\frac{\alpha}{2} = \frac{r}{\sqrt{r^2 + x^2}}$ und $\cos\frac{\alpha}{2} = \frac{x}{\sqrt{r^2 + x^2}}$, dann $\sin\alpha = 2\sin\frac{\alpha}{2}\cos\frac{\alpha}{2} = 2\frac{r}{\sqrt{r^2 + x^2}}\frac{x}{\sqrt{r^2 + x^2}} = \frac{2rx}{r^2 + x^2}$. Auf ähnliche Weise $\sin\beta = \frac{2r'x}{r'^2 + x^2}$. Also
-
-```math
-\begin{align*}
-k &= \frac{\sin\alpha}{\sin\beta} \\
-  &= \frac{\frac{2rx}{r^2 + x^2}}{\frac{2r'x}{r'^2 + x^2}} \\
-  &= \frac{\frac{r}{r^2 + x^2}}{\frac{r'}{r'^2 + x^2}} \\
-
-\end{align*}
-```
-
-Dann berechne dem Limes von $k$ wenn $x \to 0$ und $x \to \infty$:
-
-```math
-\begin{align*}
-  \lim_{r\to 0} k      & = \frac{r'}{r} \\
-  \lim_{r\to \infty} k & = \frac{r}{r'} \\
-\end{align*}
-```
+Man muss jetzt beweisen, dass $\angle XPY = 180^\circ - \angle XAY$. Markieren wir zwei weitere Winkel: $\angle DPX = \alpha$ und $\angle EPY = \beta$.
