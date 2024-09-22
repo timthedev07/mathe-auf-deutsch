@@ -25,7 +25,7 @@ Zuerst kann man das Diagramm mit GeoGebra zeichnen, durch Winkelverfolgung dann 
   height={800}
 />
 
-Man muss jetzt beweisen, dass $\angle XPY = 180^\circ - \angle XAY$. Markieren wir zwei weitere Winkel: $\angle DPX = \alpha$ und $\angle EPY = \beta$.
+Man muss jetzt beweisen, dass $\angle XPY = 180^\circ - \angle XAY$. Markieren wir zwei weitere Winkel: $\angle DPX = \alpha$ und $\angle EPY = \beta$. Auch sei der orangefarbige Winkel $\angle BAC = \gamma$
 
 <Img
   src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/bmo2-2024-p3/1.png"
@@ -33,3 +33,47 @@ Man muss jetzt beweisen, dass $\angle XPY = 180^\circ - \angle XAY$. Markieren w
   width={1200}
   height={800}
 />
+
+Um $\angle XPY = 180^\circ - \angle XAY$ zu beweisen, reicht es aus, zu zeigen, dass
+
+```math
+\begin{align*}
+\alpha + \beta + (180^\circ - 2\gamma) &= 180^\circ - \gamma \\
+\Longleftrightarrow \alpha + \beta &= \gamma
+\end{align*}
+```
+
+Jetzt beobachten wir, dass es ein paar ähnliche Dreiecke gibt. Offensichtlich sind $\triangle BDX$ und $\triangle CEY$ ähnlich.
+
+```math
+\begin{align}
+\frac{BD}{DX} = \frac{EY}{CE}
+\end{align}
+```
+
+<Img
+  src="https://raw.githubusercontent.com/timthedev07/mathe-auf-deutsch/dev/images/content/bmo2-2024-p3/2.png"
+  alt=""
+  width={1200}
+  height={800}
+/>
+
+Bevor wir weitermachen, werfen wir einen Blick in die Zukunft und uns fragen, was wir eigentlich beweisen wollen. Wir wollen beweisen, dass $\alpha + \beta = \gamma$ ist. Im Dreieck $\triangle XDP$, falls $\angle PXD = \beta$, dann wäre
+
+```math
+\angle XDP = 180^\circ - \alpha - \beta
+```
+
+aber auch
+
+```math
+\angle XDP = 180^\circ - \gamma
+```
+
+also, auf Wunsch
+
+```math
+\alpha + \beta = \gamma
+```
+
+Also ist die Aufgabe jetzt, zu beweisen, dass $\triangle XDP \sim \triangle YEP$.
