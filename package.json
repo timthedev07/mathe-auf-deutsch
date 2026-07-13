@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} ./scripts/heading.ts",
-    "watch": "ts-node-dev --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} --respawn --watch blogs/**/*.mdx ./scripts/heading.ts",
+    "prebuild": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' ./scripts/heading.ts",
+    "watch": "ts-node-dev --compiler-options '{\"module\":\"CommonJS\"}' --respawn --watch blogs/**/*.mdx ./scripts/heading.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
