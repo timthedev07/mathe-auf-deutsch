@@ -34,17 +34,43 @@ export const mdxComponents: MDXComponents = {
   },
   h2: ({ id, ...props }) => {
     const Inhalt = (
-      <h2
-        id={"_" + id}
-        className="scroll-my-32 text-2xl font-medium text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
-        {...props}
-      />
+      <>
+        <h2
+          id={"_" + id}
+          className="scroll-my-32 text-2xl font-medium text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
+          {...props}
+        />
+        <Hr />
+      </>
     );
     const c = "flex flex-col gap-3 mb-2 mt-8";
 
     return id ? (
       <Link href={`#_${id}`}>
         <LinkCopier id={"_" + id} className={c}>
+          {Inhalt}
+        </LinkCopier>
+      </Link>
+    ) : (
+      <div className={c}>{Inhalt}</div>
+    );
+  },
+  h3: ({ id, ...props }) => {
+    const Inhalt = (
+      <>
+        <h3
+          id={"__" + id}
+          className="scroll-my-32 text-xl font-medium text-white hover:after:content-['#'] after:ml-2 after:text-slate-200"
+          {...props}
+        />
+        <Hr />
+      </>
+    );
+    const c = "flex flex-col gap-3 mb-2 mt-8";
+
+    return id ? (
+      <Link href={`#__${id}`}>
+        <LinkCopier id={"__" + id} className={c}>
           {Inhalt}
         </LinkCopier>
       </Link>

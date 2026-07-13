@@ -51,8 +51,11 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
             <li
               key={h[0]}
               onClick={() => {
+                console.log(h);
                 const url =
-                  window.location.href.split("#")[0] + "#" + slugs.slug(h[0]);
+                  window.location.href.split("#")[0] +
+                  "#".repeat(parseInt(h[1].slice(1))) +
+                  slugs.slug(h[0]);
                 console.log(h[0]);
                 router.push(url);
                 setShow(false);
