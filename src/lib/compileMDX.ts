@@ -4,10 +4,10 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "../mdx-components";
-import { Meta } from "../types/meta";
+import { BlogFrontmatter } from "../types/meta";
 
 export const compileMDX = async (raw: string) => {
-  return _<Meta>({
+  return _<BlogFrontmatter>({
     source: raw,
     options: {
       mdxOptions: {

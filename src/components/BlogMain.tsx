@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { CategoryTag } from "./CategoryTag";
 import { getBlurDataURL } from "../lib/blur";
+import { LanguageBadge } from "./LanguageBadge";
 
 interface BlogMainPageProps {
   categories: string[];
@@ -186,6 +187,11 @@ const Component: FC<BlogMainPageProps> = ({
                   blurDataURL={getBlurDataURL(288, 198)}
                   fill
                   className="object-cover"
+                />
+                <LanguageBadge
+                  language={each.language}
+                  compact
+                  className="absolute right-2 top-2"
                 />
               </div>
               <h2 className="text-white/90 font-semibold break-words text-lg mt-3 h-12">

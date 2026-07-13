@@ -4,6 +4,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { AppLayout } from "../components/applayout";
 import { getMetadata } from "../lib/seo";
 import { AntDProvider } from "../contexts/antd";
+import { DEFAULT_BLOG_LANGUAGE } from "../types/meta";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang={DEFAULT_BLOG_LANGUAGE}>
       <head>
         <link
           href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"

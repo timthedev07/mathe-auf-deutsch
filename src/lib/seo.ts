@@ -1,8 +1,10 @@
 import type { Metadata as Metadata_ } from "next";
+import { DEFAULT_BLOG_LANGUAGE } from "../types/meta";
 
 export type CustomMetadata = {
   coverURL: string;
   date: string;
+  language: string;
 };
 
 type Metadata = Metadata_ & { other?: CustomMetadata };
@@ -46,19 +48,26 @@ export const getBlogMetadata = ({
   keywords,
   coverURL,
   date,
+  language = DEFAULT_BLOG_LANGUAGE,
 }: {
   title: string;
   description: string;
   keywords: string[];
   coverURL: string;
   date: string;
+  language?: string;
 }): Metadata => {
   const t = getMetadata({ title, description, keywords });
   return {
     ...t,
+    openGraph: {
+      ...t.openGraph,
+      locale: language,
+    },
     other: {
       coverURL,
       date,
+      language,
     },
   };
 };

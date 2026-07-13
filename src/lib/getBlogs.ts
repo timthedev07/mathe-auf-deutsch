@@ -1,7 +1,7 @@
 import { readFile, readdir } from "fs/promises";
 import matter from "gray-matter";
 import { join } from "path";
-import { Meta } from "../types/meta";
+import { BlogFrontmatter, Meta, normaliseBlogMeta } from "../types/meta";
 
 export const getBlogs = async () => {
   const base = join(process.cwd(), "blogs");
@@ -20,10 +20,10 @@ export const getBlogs = async () => {
           join(base, category, entry, "page.mdx"),
           "utf-8"
         );
-        return { ...matter(src).data, slug: entry };
+        return normaliseBlogMeta(matter(src).data as BlogFrontmatter, entry);
       })
     );
-    blogs[category] = meta as any as Meta[];
+    blogs[category] = meta;
   }
   return [blogs, categories] as [typeof blogs, typeof categories];
 };
