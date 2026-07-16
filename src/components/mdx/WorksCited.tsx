@@ -25,12 +25,13 @@ const getTitle = async (url: string) => {
 };
 
 interface WorksCitedProps {
-  worksCited: string[];
+  worksCited?: string[];
 }
 
 export const WorksCited: FC<WorksCitedProps> = async ({ worksCited }) => {
+  const citations = worksCited ?? [];
   const titles = await Promise.all(
-    worksCited.map(
+    citations.map(
       async (each) => [await getTitle(each), each] as [string, string]
     )
   );

@@ -9,19 +9,20 @@ import { Colors } from "./colors";
 
 interface LemmaProps {
   children: React.ReactNode;
-  num: number;
+  num: number | string;
 }
 
 export const Lemma: FC<LemmaProps> = ({ children, num }) => {
+  const lemmaNum = Number(num);
   const copyLink = () => {
-    if (!num) return;
+    if (!lemmaNum) return;
     const href = window.location.href.split("#")[0];
-    window.navigator.clipboard.writeText(`${href}${lemmaLinkId(num)}`);
+    window.navigator.clipboard.writeText(`${href}${lemmaLinkId(lemmaNum)}`);
     toast.success("Link copied to clipboard");
   };
 
-  const idLink = `${lemmaLinkId(num)}`;
-  const color = Colors[(num - 1) % Colors.length];
+  const idLink = `${lemmaLinkId(lemmaNum)}`;
+  const color = Colors[(lemmaNum - 1) % Colors.length] ?? Colors[0];
 
   return (
     <div
@@ -29,15 +30,15 @@ export const Lemma: FC<LemmaProps> = ({ children, num }) => {
     >
       <Link
         className="scroll-my-32"
-        id={lemmaLinkId(num).substring(1)}
+        id={lemmaLinkId(lemmaNum).substring(1)}
         href={idLink}
       />
-      {num && (
+      {lemmaNum && (
         <div
           onClick={copyLink}
           className={`cursor-pointer hover:text-neutral-300 group transition duration-300 ${color.hoverBg} ${color.bg} absolute h-10 -top-10 left-3 w-64 rounded-t-lg text-white px-4 flex justify-between items-center`}
         >
-          Lemma {num}.
+          Lemma {lemmaNum}.
           <LinkOutlined className="transform group-hover:scale-[1.15] transition duration-300 group-hover:animate-wiggle" />
         </div>
       )}
@@ -46,15 +47,16 @@ export const Lemma: FC<LemmaProps> = ({ children, num }) => {
   );
 };
 
-export const LemmaRef: FC<{ num: number }> = ({ num }) => {
+export const LemmaRef: FC<{ num: number | string }> = ({ num }) => {
+  const lemmaNum = Number(num);
+  const color = Colors[(lemmaNum - 1) % Colors.length] ?? Colors[0];
+
   return (
     <Link
-      className={`katex ${
-        Colors[(num - 1) % Colors.length].refBg
-      } rounded-md px-2 py-0.5`}
-      href={lemmaLinkId(num)}
+      className={`katex ${color.refBg} rounded-md px-2 py-0.5`}
+      href={lemmaLinkId(lemmaNum)}
     >
-      Lemma {num}.
+      Lemma {lemmaNum}.
     </Link>
   );
 };
