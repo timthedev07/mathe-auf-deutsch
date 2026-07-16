@@ -2,13 +2,25 @@ import Link from "next/link";
 import { FC } from "react";
 
 const getTitle = async (url: string) => {
-  const response = await fetch(`${url}`);
-  const html = await response.text();
-  const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
-  if (titleMatch && titleMatch[1]) {
-    return titleMatch[1];
-  } else {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+
+  try {
+    const response = await fetch(url, {
+      next: { revalidate: 86400 },
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      return url;
+    }
+
+    const html = await response.text();
+    const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
+    return titleMatch?.[1] ?? url;
+  } catch {
     return url;
+  } finally {
+    clearTimeout(timeout);
   }
 };
 
