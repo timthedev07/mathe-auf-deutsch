@@ -6,6 +6,7 @@ import GithubSlugger from "github-slugger";
 import { FC, useState } from "react";
 import { Headings, extractHeadings } from "../lib/extractHeadings";
 import { useRouter } from "next/navigation";
+import he from "he";
 
 interface BlogAsideProps {
   headings: ReturnType<typeof extractHeadings>;
@@ -49,14 +50,12 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
         <ol className="">
           {(headings || []).map((h) => (
             <li
-              key={h[0]}
+              key={he.decode(h[0])}
               onClick={() => {
-                console.log(h);
                 const url =
                   window.location.href.split("#")[0] +
                   "#".repeat(parseInt(h[1].slice(1))) +
-                  slugs.slug(h[0]);
-                console.log(h[0]);
+                  slugs.slug(he.decode(h[0]));
                 router.push(url);
                 setShow(false);
               }}
@@ -64,7 +63,7 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
                 st[h[1]]
               } list-disc list-inside break-words my-1 rounded-md hover:bg-slate-400/20 px-2 py-1 transition duration-200 hover:text-white cursor-pointer`}
             >
-              {h[0]}
+              {he.decode(h[0])}
             </li>
           ))}
         </ol>
