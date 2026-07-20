@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { AppLayout } from "../components/applayout";
@@ -6,7 +6,16 @@ import { getMetadata } from "../lib/seo";
 import { AntDProvider } from "../contexts/antd";
 import { DEFAULT_BLOG_LANGUAGE } from "../types/meta";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({
+  src: [
+    {
+      path: "../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+});
 
 export const metadata = getMetadata({});
 

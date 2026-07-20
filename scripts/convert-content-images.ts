@@ -2,13 +2,7 @@ import { spawn } from "child_process";
 import { access, readdir, unlink } from "fs/promises";
 import path from "path";
 
-const sourceExtensions = new Set([
-  ".heic",
-  ".heif",
-  ".tif",
-  ".tiff",
-  ".webp",
-]);
+const sourceExtensions = new Set([".heic", ".heif", ".tif", ".tiff", ".webp"]);
 
 const losslessTargetExtension = ".png";
 
@@ -32,7 +26,7 @@ async function walk(dir: string): Promise<string[]> {
       }
 
       return Promise.resolve([entryPath]);
-    })
+    }),
   );
 
   return files.flat();
@@ -40,9 +34,13 @@ async function walk(dir: string): Promise<string[]> {
 
 function convertWithSips(inputPath: string, outputPath: string) {
   return new Promise<void>((resolve, reject) => {
-    const child = spawn("sips", ["-s", "format", "png", inputPath, "--out", outputPath], {
-      stdio: "inherit",
-    });
+    const child = spawn(
+      "sips",
+      ["-s", "format", "png", inputPath, "--out", outputPath],
+      {
+        stdio: "inherit",
+      },
+    );
 
     child.on("error", reject);
     child.on("close", (code) => {
@@ -57,7 +55,9 @@ function convertWithSips(inputPath: string, outputPath: string) {
 }
 
 (async () => {
-  const targetDir = path.resolve(process.argv[2] ?? path.join("images", "content"));
+  const targetDir = path.resolve(
+    process.argv[2] ?? path.join("images", "content"),
+  );
   const files = await walk(targetDir);
   let converted = 0;
   let pruned = 0;
@@ -73,18 +73,22 @@ function convertWithSips(inputPath: string, outputPath: string) {
 
     const outputPath = path.join(
       path.dirname(filePath),
-      `${path.basename(filePath, path.extname(filePath))}${losslessTargetExtension}`
+      `${path.basename(filePath, path.extname(filePath))}${losslessTargetExtension}`,
     );
 
     if (await exists(outputPath)) {
       await unlink(filePath);
-      console.log(`Pruned ${path.relative(process.cwd(), filePath)}; kept existing ${path.relative(process.cwd(), outputPath)}`);
+      console.log(
+        `Pruned ${path.relative(process.cwd(), filePath)}; kept existing ${path.relative(process.cwd(), outputPath)}`,
+      );
       pruned += 1;
       continue;
     }
 
     await convertWithSips(filePath, outputPath);
-    console.log(`Converted ${path.relative(process.cwd(), filePath)} -> ${path.relative(process.cwd(), outputPath)}`);
+    console.log(
+      `Converted ${path.relative(process.cwd(), filePath)} -> ${path.relative(process.cwd(), outputPath)}`,
+    );
     converted += 1;
 
     await unlink(filePath);
@@ -92,7 +96,9 @@ function convertWithSips(inputPath: string, outputPath: string) {
     pruned += 1;
   }
 
-  console.log(`Done. Converted ${converted} file(s), pruned ${pruned} original(s), skipped ${skipped} file(s).`);
+  console.log(
+    `Done. Converted ${converted} file(s), pruned ${pruned} original(s), skipped ${skipped} file(s).`,
+  );
 })().catch((error) => {
   console.error(error);
   process.exit(1);
