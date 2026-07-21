@@ -59,7 +59,7 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
       <BlogAside headings={(headings as any)[`${category}/${slug}`]} />
       <main
         lang={meta.language}
-        className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-24 pb-64"
+        className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-16 md:p-24 pb-64"
       >
         <header className="relative md:w-7/10 w-8/10 mt-12">
           <h1 className="relative font-bold break-words max-w-[80%] text-white text-4xl underline decoration-cyan-400/60 pb-1 transition duration-200 hover:border-b-cyan-400/80 text-center w-max mx-auto">
@@ -100,9 +100,7 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
                     {meta.coverCredit.author && "Anonymus"}
                   </i>{" "}
                   auf{" "}
-                  <b className="text-white/90">
-                    {meta.coverCredit.platform}
-                  </b>
+                  <b className="text-white/90">{meta.coverCredit.platform}</b>
                 </Link>
               </div>
             ) : null}
