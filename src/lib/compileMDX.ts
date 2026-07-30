@@ -15,6 +15,7 @@ export const compileMDX = async (raw: string) => {
         rehypePlugins: [rehypeKatex, rehypeSlug],
       },
       parseFrontmatter: true,
+      blockJS: false,
     },
     components: mdxComponents,
   });
