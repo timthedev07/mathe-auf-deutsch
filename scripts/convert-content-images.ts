@@ -10,8 +10,10 @@ import {
 import path from "path";
 
 const sourceExtensions = new Set([".heic", ".heif", ".tif", ".tiff", ".webp"]);
+const directlyResizableExtensions = new Set([".jpg", ".jpeg"]);
 
 const losslessTargetExtension = ".png";
+const maxImageDimension = 1600;
 
 async function exists(filePath: string) {
   try {
@@ -74,6 +76,26 @@ async function getOrientation(filePath: string) {
   return Number(
     metadata.match(/<tiff:Orientation>(\d+)<\/tiff:Orientation>/)?.[1] ?? 1,
   );
+}
+
+async function resizeIfOversized(filePath: string) {
+  const output = await runSips(
+    ["-g", "pixelWidth", "-g", "pixelHeight", filePath],
+    true,
+  );
+  const width = Number(output.match(/pixelWidth:\s*(\d+)/)?.[1]);
+  const height = Number(output.match(/pixelHeight:\s*(\d+)/)?.[1]);
+
+  if (!width || !height) {
+    throw new Error(`Could not read image dimensions: ${filePath}`);
+  }
+
+  if (Math.max(width, height) <= maxImageDimension) {
+    return false;
+  }
+
+  await runSips(["-Z", String(maxImageDimension), filePath]);
+  return true;
 }
 
 const orientationOperations: Record<number, string[]> = {
@@ -147,7 +169,19 @@ async function convertWithSips(inputPath: string, outputPath: string) {
   let converted = 0;
   let normalised = 0;
   let pruned = 0;
+  let resized = 0;
   let skipped = 0;
+
+  const resize = async (filePath: string) => {
+    if (!(await resizeIfOversized(filePath))) {
+      return;
+    }
+
+    console.log(
+      `Resized ${path.relative(process.cwd(), filePath)} to a maximum edge of ${maxImageDimension}px`,
+    );
+    resized += 1;
+  };
 
   for (const filePath of files) {
     const extension = path.extname(filePath).toLowerCase();
@@ -160,10 +194,16 @@ async function convertWithSips(inputPath: string, outputPath: string) {
         );
         normalised += 1;
       }
+      await resize(filePath);
       continue;
     }
 
     if (!sourceExtensions.has(extension)) {
+      if (directlyResizableExtensions.has(extension)) {
+        await resize(filePath);
+        continue;
+      }
+
       skipped += 1;
       continue;
     }
@@ -179,6 +219,7 @@ async function convertWithSips(inputPath: string, outputPath: string) {
         `Pruned ${path.relative(process.cwd(), filePath)}; kept existing ${path.relative(process.cwd(), outputPath)}`,
       );
       pruned += 1;
+      await resize(outputPath);
       continue;
     }
 
@@ -187,6 +228,7 @@ async function convertWithSips(inputPath: string, outputPath: string) {
       `Converted ${path.relative(process.cwd(), filePath)} -> ${path.relative(process.cwd(), outputPath)}`,
     );
     converted += 1;
+    await resize(outputPath);
 
     await unlink(filePath);
     console.log(`Pruned ${path.relative(process.cwd(), filePath)}`);
@@ -194,7 +236,7 @@ async function convertWithSips(inputPath: string, outputPath: string) {
   }
 
   console.log(
-    `Done. Converted ${converted} file(s), normalised ${normalised} image(s), pruned ${pruned} original(s), skipped ${skipped} file(s).`,
+    `Done. Converted ${converted} file(s), normalised ${normalised} image(s), resized ${resized} image(s), pruned ${pruned} original(s), skipped ${skipped} file(s).`,
   );
 })().catch((error) => {
   console.error(error);
