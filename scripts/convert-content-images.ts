@@ -9,11 +9,14 @@ import {
 } from "fs/promises";
 import path from "path";
 
-const sourceExtensions = new Set([".heic", ".heif", ".tif", ".tiff", ".webp"]);
+const sourceExtensions = new Set([".heic", ".heif", ".tif", ".tiff"]);
 const directlyResizableExtensions = new Set([".jpg", ".jpeg"]);
+const photoSourceExtensions = new Set([".heic", ".heif", ".tif", ".tiff"]);
 
 const losslessTargetExtension = ".png";
 const maxImageDimension = 1600;
+const jpegQuality = 82;
+const cameraPhotoName = /^(?:IMG|DSC|PXL)[_-]?\d/i;
 
 async function exists(filePath: string) {
   try {
@@ -76,6 +79,11 @@ async function getOrientation(filePath: string) {
   return Number(
     metadata.match(/<tiff:Orientation>(\d+)<\/tiff:Orientation>/)?.[1] ?? 1,
   );
+}
+
+async function hasAlpha(filePath: string) {
+  const output = await runSips(["-g", "hasAlpha", filePath], true);
+  return /hasAlpha:\s*yes/i.test(output);
 }
 
 async function resizeIfOversized(filePath: string) {
@@ -161,6 +169,104 @@ async function convertWithSips(inputPath: string, outputPath: string) {
   await normaliseOrientation(outputPath, orientation);
 }
 
+async function convertPhoto(inputPath: string, outputPath: string) {
+  const orientation = await getOrientation(inputPath);
+  const operations = orientationOperations[orientation];
+
+  if (!operations) {
+    throw new Error(`Unsupported image orientation ${orientation}: ${inputPath}`);
+  }
+
+  const normalisedPath = `${outputPath}.normalised.png`;
+  const temporaryPath = `${outputPath}.temporary.jpg`;
+  let encodingSource = inputPath;
+
+  try {
+    if (operations.length > 0) {
+      await runSips([
+        ...operations,
+        "-s",
+        "format",
+        "png",
+        inputPath,
+        "--out",
+        normalisedPath,
+      ]);
+      await stripOrientationMetadata(normalisedPath);
+      encodingSource = normalisedPath;
+    }
+
+    const output = await runSips(
+      ["-g", "pixelWidth", "-g", "pixelHeight", encodingSource],
+      true,
+    );
+    const width = Number(output.match(/pixelWidth:\s*(\d+)/)?.[1]);
+    const height = Number(output.match(/pixelHeight:\s*(\d+)/)?.[1]);
+
+    if (!width || !height) {
+      throw new Error(`Could not read image dimensions: ${encodingSource}`);
+    }
+
+    const resizeArguments =
+      Math.max(width, height) > maxImageDimension
+        ? ["-Z", String(maxImageDimension)]
+        : [];
+
+    await runSips([
+      ...resizeArguments,
+      "-s",
+      "format",
+      "jpeg",
+      "-s",
+      "formatOptions",
+      String(jpegQuality),
+      encodingSource,
+      "--out",
+      temporaryPath,
+    ]);
+    await rename(temporaryPath, outputPath);
+  } catch (error) {
+    await unlink(temporaryPath).catch(() => undefined);
+    throw error;
+  } finally {
+    await unlink(normalisedPath).catch(() => undefined);
+  }
+}
+
+async function updateBlogReferences(inputPath: string, outputPath: string) {
+  const blogsDir = path.resolve("blogs");
+
+  if (!(await exists(blogsDir))) {
+    return 0;
+  }
+
+  const inputReference = path
+    .relative(process.cwd(), inputPath)
+    .split(path.sep)
+    .join("/");
+  const outputReference = path
+    .relative(process.cwd(), outputPath)
+    .split(path.sep)
+    .join("/");
+  let updated = 0;
+
+  for (const blogPath of await walk(blogsDir)) {
+    if (path.extname(blogPath).toLowerCase() !== ".mdx") {
+      continue;
+    }
+
+    const content = await readFile(blogPath, "utf8");
+    const revisedContent = content.replaceAll(inputReference, outputReference);
+
+    if (revisedContent !== content) {
+      await writeFile(blogPath, revisedContent);
+      updated += 1;
+    }
+  }
+
+  return updated;
+}
+
 (async () => {
   const targetDir = path.resolve(
     process.argv[2] ?? path.join("images", "content"),
@@ -170,6 +276,8 @@ async function convertWithSips(inputPath: string, outputPath: string) {
   let normalised = 0;
   let pruned = 0;
   let resized = 0;
+  let optimised = 0;
+  let referencesUpdated = 0;
   let skipped = 0;
 
   const resize = async (filePath: string) => {
@@ -185,6 +293,36 @@ async function convertWithSips(inputPath: string, outputPath: string) {
 
   for (const filePath of files) {
     const extension = path.extname(filePath).toLowerCase();
+
+    const shouldEncodeAsPhoto =
+      (photoSourceExtensions.has(extension) ||
+        (extension === losslessTargetExtension &&
+          cameraPhotoName.test(path.basename(filePath)))) &&
+      !(await hasAlpha(filePath));
+
+    if (shouldEncodeAsPhoto) {
+      const outputPath = path.join(
+        path.dirname(filePath),
+        `${path.basename(filePath, path.extname(filePath))}.jpg`,
+      );
+
+      if (!(await exists(outputPath))) {
+        await convertPhoto(filePath, outputPath);
+        console.log(
+          `Optimised ${path.relative(process.cwd(), filePath)} -> ${path.relative(process.cwd(), outputPath)} (JPEG quality ${jpegQuality})`,
+        );
+        optimised += 1;
+      } else {
+        console.log(
+          `Pruned ${path.relative(process.cwd(), filePath)}; kept existing ${path.relative(process.cwd(), outputPath)}`,
+        );
+      }
+
+      referencesUpdated += await updateBlogReferences(filePath, outputPath);
+      await unlink(filePath);
+      pruned += 1;
+      continue;
+    }
 
     if (extension === losslessTargetExtension) {
       const orientation = await getOrientation(filePath);
@@ -236,7 +374,7 @@ async function convertWithSips(inputPath: string, outputPath: string) {
   }
 
   console.log(
-    `Done. Converted ${converted} file(s), normalised ${normalised} image(s), resized ${resized} image(s), pruned ${pruned} original(s), skipped ${skipped} file(s).`,
+    `Done. Optimised ${optimised} photo(s), converted ${converted} file(s), normalised ${normalised} image(s), resized ${resized} image(s), pruned ${pruned} original(s), updated references in ${referencesUpdated} blog file(s), skipped ${skipped} file(s).`,
   );
 })().catch((error) => {
   console.error(error);
