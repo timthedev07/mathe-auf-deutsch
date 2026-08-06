@@ -1,13 +1,27 @@
 const githubImagesUrl =
   /https:\/\/raw\.githubusercontent\.com\/timthedev07\/mathe-auf-deutsch\/[^/]+\/images\//g;
 
+function getImageBaseUrl() {
+  const configuredImageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL?.trim();
+
+  if (!configuredImageBaseUrl) {
+    return undefined;
+  }
+
+  const imageBaseUrl = /^[a-z][a-z\d+.-]*:\/\//i.test(configuredImageBaseUrl)
+    ? configuredImageBaseUrl
+    : `https://${configuredImageBaseUrl}`;
+
+  return imageBaseUrl.replace(/\/+$/, "");
+}
+
 /**
  * Serve repository images from R2 when NEXT_PUBLIC_IMAGE_BASE_URL is set.
  * The bucket should contain the contents of `images/` at its root, e.g.
  * `content/20260719/IMG_6267.jpg`.
  */
 export function resolveImageUrl(url: string) {
-  const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL?.replace(/\/+$/, "");
+  const imageBaseUrl = getImageBaseUrl();
 
   if (!imageBaseUrl) {
     return url;
@@ -17,7 +31,7 @@ export function resolveImageUrl(url: string) {
 }
 
 export function rewriteImageUrls(content: string) {
-  const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL?.replace(/\/+$/, "");
+  const imageBaseUrl = getImageBaseUrl();
 
   if (!imageBaseUrl) {
     return content;

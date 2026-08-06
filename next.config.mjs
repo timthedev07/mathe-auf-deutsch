@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || "https://images.timthedev07.cc";
+const configuredImageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || "images.timthedev07.cc";
+const imageBaseUrl = /^[a-z][a-z\d+.-]*:\/\//i.test(configuredImageBaseUrl)
+  ? configuredImageBaseUrl
+  : `https://${configuredImageBaseUrl}`;
 const imageHostname = new URL(imageBaseUrl).hostname;
 
 const nextConfig = {
