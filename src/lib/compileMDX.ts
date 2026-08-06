@@ -5,10 +5,11 @@ import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "../mdx-components";
 import { BlogFrontmatter } from "../types/meta";
+import { rewriteImageUrls } from "./imageUrl";
 
 export const compileMDX = async (raw: string) => {
   return _<BlogFrontmatter>({
-    source: raw,
+    source: rewriteImageUrls(raw),
     options: {
       mdxOptions: {
         remarkPlugins: [remarkGfm, remarkMath],

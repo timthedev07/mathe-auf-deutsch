@@ -1,3 +1,5 @@
+import { resolveImageUrl } from "../lib/imageUrl";
+
 export const DEFAULT_BLOG_LANGUAGE = "de";
 
 export type Meta = {
@@ -24,6 +26,7 @@ export const normaliseBlogMeta = (
   slug: string,
 ): Meta => ({
   ...meta,
+  coverURL: resolveImageUrl(meta.coverURL),
   language: meta.language || DEFAULT_BLOG_LANGUAGE,
   slug,
 });
