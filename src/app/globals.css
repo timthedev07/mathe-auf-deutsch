@@ -36,6 +36,34 @@
     -webkit-backdrop-filter: blur(7px);
     border: 1px solid rgba(33, 30, 48, 0.3);
   }
+
+  .image-skeleton {
+    background: linear-gradient(
+      110deg,
+      rgba(51, 65, 85, 0.8) 20%,
+      rgba(100, 116, 139, 0.48) 38%,
+      rgba(34, 211, 238, 0.18) 50%,
+      rgba(100, 116, 139, 0.48) 62%,
+      rgba(51, 65, 85, 0.8) 80%
+    );
+    background-size: 250% 100%;
+    animation: image-skeleton-shimmer 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes image-skeleton-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-skeleton {
+    animation: none;
+  }
 }
 
 .ant-menu {

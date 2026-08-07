@@ -5,7 +5,7 @@ import { BlogAside } from "../../../../components/BlogAside";
 import headings from "@/headings.json";
 import { getBlogMetadata } from "../../../../lib/seo";
 import { compileMDX } from "../../../../lib/compileMDX";
-import Image from "next/image";
+import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { CalendarOutlined } from "@ant-design/icons";
 import { CategoryTag } from "../../../../components/CategoryTag";
 import Link from "next/link";
@@ -82,13 +82,13 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
             ))}
           </ul>
           <div className="max-w-[800px] mx-auto mt-8">
-            <Image
+            <ImageWithSkeleton
               src={meta.coverURL}
               alt={meta.title}
               width={1200}
               height={800}
               className="rounded-lg"
-            ></Image>
+            />
             {!!meta.coverCredit ? (
               <div className="text-center w-max mx-auto mt-6 border-b-4 transition duration-200 pb-1 border-transparent hover:border-b-cyan-500">
                 <Link

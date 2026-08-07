@@ -10,12 +10,11 @@ import { Button, FloatButton, Input, Menu, MenuProps } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC, useMemo, useState } from "react";
 import { getBlogs } from "../lib/getBlogs";
-import Image from "next/image";
+import { ImageWithSkeleton } from "./ImageWithSkeleton";
 import { truncateAtWord } from "../lib/truncateAtWord";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CategoryTag } from "./CategoryTag";
-import { getBlurDataURL } from "../lib/blur";
 import { LanguageBadge } from "./LanguageBadge";
 
 interface BlogMainPageProps {
@@ -180,11 +179,9 @@ const Component: FC<BlogMainPageProps> = ({
           .map(([each, category]) => (
             <li key={each.title} className="flex flex-col w-72">
               <div className="relative w-72 h-48 rounded-lg overflow-hidden">
-                <Image
+                <ImageWithSkeleton
                   alt={each.title}
                   src={each.coverURL}
-                  placeholder="blur"
-                  blurDataURL={getBlurDataURL(288, 198)}
                   fill
                   className="object-cover"
                 />

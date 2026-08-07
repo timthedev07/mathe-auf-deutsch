@@ -1,8 +1,7 @@
 import { FC } from "react";
-import Image from "next/image";
+import { ImageWithSkeleton } from "../ImageWithSkeleton";
 import { Tooltip } from "antd";
 import Link from "next/link";
-import { getBlurDataURL } from "../../lib/blur";
 
 interface ImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width: number;
@@ -23,15 +22,13 @@ export const Img: FC<ImgProps> = ({
   ...props
 }) => {
   const I = (
-    <Image
+    <ImageWithSkeleton
       width={width}
       height={height}
       loading="lazy"
       className="rounded-lg shadow-2xl"
       src={src || ""}
       alt={alt || ""}
-      placeholder="blur"
-      blurDataURL={getBlurDataURL(width, height)}
       {...props}
     />
   );
