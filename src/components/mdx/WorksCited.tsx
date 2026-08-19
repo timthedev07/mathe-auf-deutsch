@@ -1,26 +1,33 @@
 import Link from "next/link";
+import { unstable_cache } from "next/cache";
 import { FC } from "react";
 
-const getTitle = async (url: string) => {
+const getCachedTitle = unstable_cache(async (url: string) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: 86400 },
+      cache: "no-store",
       signal: controller.signal,
     });
     if (!response.ok) {
-      return url;
+      throw new Error(`Failed to fetch ${url}: ${response.status}`);
     }
 
     const html = await response.text();
     const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
     return titleMatch?.[1] ?? url;
-  } catch {
-    return url;
   } finally {
     clearTimeout(timeout);
+  }
+}, ["works-cited-title"], { revalidate: 86400 });
+
+const getTitle = async (url: string) => {
+  try {
+    return await getCachedTitle(url);
+  } catch {
+    return url;
   }
 };
 

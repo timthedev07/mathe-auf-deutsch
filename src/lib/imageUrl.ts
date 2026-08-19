@@ -1,12 +1,9 @@
-const githubImagesUrl =
-  /https:\/\/raw\.githubusercontent\.com\/timthedev07\/mathe-auf-deutsch\/[^/]+\/images\//g;
+const repositoryImagePath = /^\/?(?:content|thumbnails)\//;
+const defaultImageBaseUrl = "https://images.blog.timthedev07.cc";
 
 function getImageBaseUrl() {
-  const configuredImageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL?.trim();
-
-  if (!configuredImageBaseUrl) {
-    return undefined;
-  }
+  const configuredImageBaseUrl =
+    process.env.NEXT_PUBLIC_IMAGE_BASE_URL?.trim() || defaultImageBaseUrl;
 
   const imageBaseUrl = /^[a-z][a-z\d+.-]*:\/\//i.test(configuredImageBaseUrl)
     ? configuredImageBaseUrl
@@ -16,18 +13,20 @@ function getImageBaseUrl() {
 }
 
 /**
- * Serve repository images from R2 when NEXT_PUBLIC_IMAGE_BASE_URL is set.
+ * Serve repository images from the configured image bucket.
  * The bucket should contain the contents of `images/` at its root, e.g.
  * `content/20260719/IMG_6267.jpg`.
  */
 export function resolveImageUrl(url: string) {
   const imageBaseUrl = getImageBaseUrl();
 
-  if (!imageBaseUrl) {
+  if (!imageBaseUrl || !url) {
     return url;
   }
 
-  return url.replace(githubImagesUrl, `${imageBaseUrl}/`);
+  return repositoryImagePath.test(url)
+    ? `${imageBaseUrl}/${url.replace(/^\/+/, "")}`
+    : url;
 }
 
 export function rewriteImageUrls(content: string) {
@@ -37,5 +36,8 @@ export function rewriteImageUrls(content: string) {
     return content;
   }
 
-  return content.replace(githubImagesUrl, `${imageBaseUrl}/`);
+  return content.replace(
+    /(\bsrc=["'])(\/?(?:content|thumbnails)\/)/g,
+    `$1${imageBaseUrl}/$2`,
+  );
 }

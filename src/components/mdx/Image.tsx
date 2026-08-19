@@ -7,6 +7,7 @@ interface ImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width: number;
   height: number;
   src: string;
+  rotate?: number;
   originalSource?: {
     url: string;
     author: string;
@@ -18,6 +19,7 @@ export const Img: FC<ImgProps> = ({
   src,
   height,
   width,
+  rotate,
   originalSource,
   ...props
 }) => {
@@ -25,6 +27,7 @@ export const Img: FC<ImgProps> = ({
     <ImageWithSkeleton
       width={width}
       height={height}
+      rotate={rotate}
       loading="lazy"
       className="rounded-lg shadow-2xl"
       src={src || ""}
