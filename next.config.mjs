@@ -9,9 +9,26 @@ const imageHostname = new URL(imageBaseUrl).hostname;
 const nextConfig = {
   pageExtensions: ["ts", "tsx"],
   images: {
-    remotePatterns: ["i.imgur.com", "imgur.com", imageHostname].map((each) => ({
-      hostname: each,
-    })),
+    // Images are immutable assets already served by R2/Imgur. Serving them
+    // directly avoids Vercel Image Optimization transformations entirely.
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: imageHostname,
+        pathname: "/content/**",
+      },
+      {
+        protocol: "https",
+        hostname: imageHostname,
+        pathname: "/thumbnails/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.imgur.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 
