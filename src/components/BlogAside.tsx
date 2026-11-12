@@ -6,7 +6,7 @@ import GithubSlugger from "github-slugger";
 import { FC, useState } from "react";
 import { Headings, extractHeadings } from "../lib/extractHeadings";
 import { useRouter } from "next/navigation";
-import he from "he";
+import * as he from "he";
 
 interface BlogAsideProps {
   headings: ReturnType<typeof extractHeadings>;

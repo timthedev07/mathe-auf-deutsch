@@ -6,25 +6,26 @@ import headings from "@/headings.json";
 import { getBlogMetadata } from "../../../../lib/seo";
 import { compileMDX } from "../../../../lib/compileMDX";
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
-import { CalendarOutlined } from "@ant-design/icons";
+import { CalendarIcon } from "@/components/CalendarIcon";
 import { CategoryTag } from "../../../../components/CategoryTag";
 import Link from "next/link";
 import { normaliseBlogMeta } from "../../../../types/meta";
 import { LanguageBadge } from "../../../../components/LanguageBadge";
 
-type Props = {
-  params: {
+type BlogParams = {
     slug: string;
     category: string;
-  };
+};
+type Props = {
+  params: Promise<BlogParams>;
 };
 
-export async function generateStaticParams(): Promise<Props["params"][]> {
+export async function generateStaticParams(): Promise<BlogParams[]> {
   const fpath = join(process.cwd(), "blogs");
   const categories = (await readdir(fpath)).filter(
     (a) => a.search(/\./) === -1,
   );
-  const identifiers: Props["params"][] = [];
+  const identifiers: BlogParams[] = [];
 
   for (const category of categories) {
     const slugs = await readdir(join(fpath, category));
@@ -36,17 +37,15 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
 }
 
 // or Dynamic metadata
-export async function generateMetadata({
-  params: { category, slug },
-}: {
-  params: Props["params"];
-}) {
+export async function generateMetadata({ params }: Props) {
+  const { category, slug } = await params;
   const fpath = join(process.cwd(), "blogs", category, slug, "page.mdx");
   const { frontmatter } = await compileMDX(await readFile(fpath, "utf-8"));
   return getBlogMetadata(normaliseBlogMeta(frontmatter, slug));
 }
 
-const Page: FC<Props> = async ({ params: { category, slug } }) => {
+const Page: FC<Props> = async ({ params }) => {
+  const { category, slug } = await params;
   const fpath = join(process.cwd(), "blogs");
   let raw = await readFile(join(fpath, category, slug, "page.mdx"), "utf-8");
   raw = raw.replace(/^import\b.*/g, "");
@@ -67,7 +66,7 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
           </h1>
           <h2 className="text-white/80 text-lg text-center mt-6 flex flex-wrap items-center justify-center gap-3">
             <span>
-              <CalendarOutlined />{" "}
+              <CalendarIcon />{" "}
               {Intl.DateTimeFormat(meta.language, { dateStyle: "full" }).format(
                 new Date(meta.date),
               )}
