@@ -88,7 +88,7 @@ export const Entertainment: FC<EntertainmentProps> = ({
 }) => {
   return (
     <div className="glass bg-slate-700/20 border-slate-400/20 border rounded-xl px-12 py-8 w-fit">
-      <div className="flex gap-6">
+      <div className="flex gap-6 md:flex-row flex-col items-center">
         <div className="max-w-[100px]">
           <ImageWithSkeleton
             src={resolveImageUrl(path)}

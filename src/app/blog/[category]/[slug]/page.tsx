@@ -13,8 +13,8 @@ import { normaliseBlogMeta } from "../../../../types/meta";
 import { LanguageBadge } from "../../../../components/LanguageBadge";
 
 type BlogParams = {
-    slug: string;
-    category: string;
+  slug: string;
+  category: string;
 };
 type Props = {
   params: Promise<BlogParams>;
@@ -58,13 +58,13 @@ const Page: FC<Props> = async ({ params }) => {
       <BlogAside headings={(headings as any)[`${category}/${slug}`]} />
       <main
         lang={meta.language}
-        className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-16 md:p-24 pb-64"
+        className="fixed flex w-full top-0 lg:w-[calc(100%-20rem)] flex-col gap-4 h-full overflow-y-auto lg:left-80 p-4 md:p-24 pb-64"
       >
-        <header className="relative md:w-7/10 w-8/10 mt-12">
-          <h1 className="relative font-bold break-words max-w-[80%] text-white text-4xl underline decoration-cyan-400/60 pb-1 transition duration-200 hover:border-b-cyan-400/80 text-center w-max mx-auto">
+        <header className="relative w-full mt-12">
+          <h1 className="relative font-bold break-words text-white text-2xl lg:text-4xl underline decoration-cyan-400/60 pb-1 transition duration-200 hover:border-b-cyan-400/80 text-center w-full">
             {meta.title}
           </h1>
-          <h2 className="text-white/80 text-lg text-center mt-6 flex flex-wrap items-center justify-center gap-3">
+          <h2 className="text-white/80 text-center mt-6 flex flex-wrap items-center justify-center gap-3">
             <span>
               <CalendarIcon />{" "}
               {Intl.DateTimeFormat(meta.language, { dateStyle: "full" }).format(

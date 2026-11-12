@@ -28,11 +28,12 @@ export const BlogAside: FC<BlogAsideProps> = ({ headings }) => {
 
   return (
     <>
-      <div className="lg:hidden block">
+      <div className="lg:hidden block w-12 h-12">
         <FloatButton
           className={`transition duration-200 fixed top-24 ${
             show ? "translate-y-[80vh]" : ""
           } left-8`}
+          style={{ bottom: "auto", insetInlineEnd: "auto" }}
           onClick={() => setShow(!show)}
           type="primary"
           icon={show ? <CloseOutlined /> : <ReadOutlined />}

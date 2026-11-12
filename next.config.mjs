@@ -8,6 +8,7 @@ const imageHostname = new URL(imageBaseUrl).hostname;
 
 const nextConfig = {
   pageExtensions: ["ts", "tsx"],
+  devIndicators: false,
   images: {
     // Images are immutable assets already served by R2/Imgur. Serving them
     // directly avoids Vercel Image Optimization transformations entirely.

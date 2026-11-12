@@ -76,10 +76,7 @@ export function ImageWithSkeleton({
         onLoad={(event) => {
           setIsLoaded(true);
           onLoad?.(event);
-        }}
-        onLoadingComplete={(image) => {
-          setIsLoaded(true);
-          onLoadingComplete?.(image);
+          onLoadingComplete?.(event.currentTarget);
         }}
         onError={(event) => {
           setIsLoaded(true);

@@ -6,7 +6,7 @@ import {
   FolderOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Button, FloatButton, Input, Menu, MenuProps } from "antd";
+import { Button, FloatButton, Input, Menu, MenuProps, Space } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC, useMemo, useState } from "react";
 import { getBlogs } from "../lib/getBlogs";
@@ -92,32 +92,32 @@ const Component: FC<BlogMainPageProps> = ({
         <h1 className="text-center font-bold text-white text-2xl mb-8">
           Suchen
         </h1>
-        <Input
-          value={q}
-          onChange={(e) => {
-            setQ(e.target.value);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") updateParams(["q"], [q]);
-          }}
-          addonAfter={
-            <DeleteOutlined
-              className="hover:text-red-500 transition duration-200 cursor-pointer"
-              onClick={() => {
-                setQ("");
-                updateParams(["q"], [""]);
-              }}
-            />
-          }
-          addonBefore={
-            <SearchOutlined
-              className="hover:text-emerald-500 transition duration-200 cursor-pointer"
-              onClick={() => {
-                updateParams(["q"], [q]);
-              }}
-            />
-          }
-        />
+        <Space.Compact block>
+          <Button
+            aria-label="Search"
+            ghost
+            style={{ borderColor: "#374151", color: "rgba(255, 255, 255, 0.85)" }}
+            icon={<SearchOutlined />}
+            onClick={() => updateParams(["q"], [q])}
+          />
+          <Input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") updateParams(["q"], [q]);
+            }}
+          />
+          <Button
+            aria-label="Clear search"
+            ghost
+            style={{ borderColor: "#374151", color: "rgba(255, 255, 255, 0.85)" }}
+            icon={<DeleteOutlined />}
+            onClick={() => {
+              setQ("");
+              updateParams(["q"], [""]);
+            }}
+          />
+        </Space.Compact>
         <div className="h-8"></div>
         <Menu
           onClick={(e) => {
@@ -177,13 +177,14 @@ const Component: FC<BlogMainPageProps> = ({
             (a, b) =>
               -new Date(a[0].date).valueOf() + new Date(b[0].date).valueOf(),
           )
-          .map(([each, category]) => (
+          .map(([each, category], index) => (
             <li key={each.title} className="flex flex-col w-72">
               <div className="relative w-72 h-48 rounded-lg overflow-hidden">
                 <ImageWithSkeleton
                   alt={each.title}
                   src={each.coverURL}
                   fill
+                  loading={index < 3 ? "eager" : "lazy"}
                   className="object-cover"
                 />
                 <LanguageBadge
