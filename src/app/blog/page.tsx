@@ -7,7 +7,7 @@ const BlogHome: FC = async () => {
   const allKeywords = new Set(
     Object.values(blogs)
       .flatMap((each) => each.map((each) => each.keywords))
-      .flat()
+      .flat(),
   );
 
   return (

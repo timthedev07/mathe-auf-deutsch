@@ -45,12 +45,13 @@ const Component: FC<BlogMainPageProps> = ({
         label: category
           .split("-")
           .map((each) => each.slice(0, 1).toUpperCase() + each.slice(1))
+          .map((each) => (each.toLowerCase() === "und" ? "und" : each))
           .join(" "),
         key: category,
         icon: <FolderOpenOutlined />,
       })),
     ],
-    [categories]
+    [categories],
   );
 
   const updateParams = (keys: string[], values: string[]) => {
@@ -76,10 +77,10 @@ const Component: FC<BlogMainPageProps> = ({
   const [showAside, setShowAside] = useState(false);
   const [q, setQ] = useState(t);
   const [selectedCategory, setCategory] = useState(
-    () => params.get("kategorie") || ""
+    () => params.get("kategorie") || "",
   );
   const [selectedLabel, setSelectedLabel] = useState<string>(
-    params.get("keyword") || ""
+    params.get("keyword") || "",
   );
   return (
     <>
@@ -167,14 +168,14 @@ const Component: FC<BlogMainPageProps> = ({
                       .toLowerCase()
                       .includes(t.toLowerCase())) &&
                   (!selectedCategory || category === selectedCategory) &&
-                  (!selectedLabel || v.keywords.includes(selectedLabel))
+                  (!selectedLabel || v.keywords.includes(selectedLabel)),
               )
-              .map((each) => [each, category] as [typeof each, string])
+              .map((each) => [each, category] as [typeof each, string]),
           )
           .flat()
           .sort(
             (a, b) =>
-              -new Date(a[0].date).valueOf() + new Date(b[0].date).valueOf()
+              -new Date(a[0].date).valueOf() + new Date(b[0].date).valueOf(),
           )
           .map(([each, category]) => (
             <li key={each.title} className="flex flex-col w-72">

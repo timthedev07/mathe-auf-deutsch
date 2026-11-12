@@ -81,14 +81,16 @@ const Page: FC<Props> = async ({ params: { category, slug } }) => {
               </CategoryTag>
             ))}
           </ul>
-          <div className="max-w-[800px] mx-auto mt-8">
-            <ImageWithSkeleton
-              src={meta.coverURL}
-              alt={meta.title}
-              width={1200}
-              height={800}
-              className="rounded-lg"
-            />
+          <div className="max-w-[500px] mx-auto mt-8">
+            <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+              <ImageWithSkeleton
+                src={meta.coverURL}
+                alt={meta.title}
+                fill
+                sizes="(max-width: 500px) 100vw, 500px"
+                className="object-cover"
+              />
+            </div>
             {!!meta.coverCredit ? (
               <div className="text-center w-max mx-auto mt-6 border-b-4 transition duration-200 pb-1 border-transparent hover:border-b-cyan-500">
                 <Link

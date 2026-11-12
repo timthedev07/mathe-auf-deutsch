@@ -56,7 +56,9 @@ export function ImageWithSkeleton({
           : {
               aspectRatio: canTransposeFrame
                 ? `${height}/${width}`
-                : `${width}/${height}`,
+                : isLoaded
+                  ? undefined
+                  : `${width}/${height}`,
             }
       }
     >

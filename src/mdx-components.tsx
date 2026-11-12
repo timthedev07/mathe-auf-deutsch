@@ -5,10 +5,11 @@ import { Img } from "./components/mdx/Image";
 import { Lemma, LemmaProof, LemmaRef } from "./components/mdx/Lemma";
 import { InTextRef, WorksCited } from "./components/mdx/WorksCited";
 import { Proof, ProofEnd, ProofRef } from "./components/mdx/Proof";
+import { Entertainment } from "./components/mdx/Entertainment";
 
 const Hr = () => <hr className="h-0 border-1 border-slate-200/30" />;
 
-export const mdxComponents: MDXComponents = {
+export const mdxComponents = {
   h1: ({ id, ...props }) => {
     const Inhalt = (
       <>
@@ -86,7 +87,7 @@ export const mdxComponents: MDXComponents = {
   ),
   ol: (props) => (
     <ol
-      className="list-[lower-greek] list-inside leading-loose pl-4 text-white"
+      className="list-decimal list-inside leading-loose pl-4 marker:text-white/50 text-white/70"
       {...props}
     ></ol>
   ),
@@ -111,4 +112,15 @@ export const mdxComponents: MDXComponents = {
   WorksCited: WorksCited,
   InTextRef: InTextRef,
   ProofEnd: ProofEnd,
-};
+  Entertainment: Entertainment,
+  a: (props) => (
+    <a
+      className="text-cyan-400/80 hover:text-cyan-300/90 transition-colors duration-200"
+      {...props}
+    />
+  ),
+} satisfies MDXComponents;
+
+declare global {
+  type MDXProvidedComponents = typeof mdxComponents;
+}

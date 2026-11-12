@@ -1,3 +1,11 @@
 {
-  "mdx.server.enable": true
+  "mdx.server.enable": true,
+  "[mdx]": {
+    "editor.quickSuggestions": {
+      "other": "on",
+      "comments": "off",
+      "strings": "off"
+    },
+    "editor.snippetSuggestions": "top"
+  }
 }

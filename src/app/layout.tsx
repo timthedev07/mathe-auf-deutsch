@@ -32,7 +32,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={inter.className + " bg-gray-900 text-white/70"}>
+      <body
+        className={
+          inter.className +
+          " min-h-screen bg-slate-950 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 bg-fixed text-white/70"
+        }
+      >
         <AntdRegistry>
           <AntDProvider>
             <AppLayout>{children}</AppLayout>
